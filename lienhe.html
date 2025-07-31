@@ -78,20 +78,21 @@
   </nav>
 
   <main>
-    <form name="lienhe" method="POST" data-netlify="true">
-      <input type="hidden" name="form-name" value="lienhe">
-      
-      <label for="name">👤 Họ và tên học sinh:</label>
-      <input type="text" id="name" name="name" required>
+   <form name="lienhe" method="POST" data-netlify="true" action="/lienhe.html">
+  <input type="hidden" name="form-name" value="lienhe">
+  
+  <label for="name">👤 Họ và tên học sinh:</label>
+  <input type="text" id="name" name="name" required>
 
-      <label for="class">🏫 Lớp:</label>
-      <input type="text" id="class" name="class" required>
+  <label for="class">🏫 Lớp:</label>
+  <input type="text" id="class" name="class" required>
 
-      <label for="message">✉️ Nội dung tin nhắn:</label>
-      <textarea id="message" name="message" rows="5" required></textarea>
+  <label for="message">✉️ Nội dung tin nhắn:</label>
+  <textarea id="message" name="message" rows="5" required></textarea>
 
-      <button type="submit">Gửi tin nhắn</button>
-    </form>
+  <button type="submit">Gửi tin nhắn</button>
+</form>
+
   </main>
 
 </body>
