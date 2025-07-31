@@ -1,88 +1,98 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Toán lớp 5 – Kết nối tri thức</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liên hệ - Toán lớp 5</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f5f5f5;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
       margin: 0;
       padding: 0;
-      color: #2c3e50;
     }
     header {
-      background-color: #00796b;
-      padding: 15px 0;
+      background-color: #2c3e50;
+      padding: 15px;
+      text-align: center;
+      color: white;
     }
     nav {
       display: flex;
       justify-content: center;
-      gap: 40px;
+      background-color: #34495e;
     }
     nav a {
       color: white;
-      font-weight: bold;
       text-decoration: none;
-      font-size: 18px;
+      padding: 14px 20px;
     }
     nav a:hover {
-      text-decoration: underline;
+      background-color: #2c3e50;
     }
     main {
-      max-width: 800px;
+      max-width: 600px;
       margin: 30px auto;
-      background-color: white;
+      background: white;
       padding: 30px;
       border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    .footer {
-      text-align: center;
-      padding: 15px;
-      font-size: 0.9em;
-      color: #555;
-      border-top: 1px solid #ccc;
-      margin-top: 30px;
+    h2 {
+      color: #2c3e50;
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #219150;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <nav>
-      <a href="index.html">Trang chủ</a>
-      <a href="baihoc.html">Bài học</a>
-      <a href="lienhe.html">Liên hệ</a>
-    </nav>
+    <h1>Liên hệ với giáo viên</h1>
   </header>
 
+  <nav>
+    <a href="index.html">Trang chủ</a>
+    <a href="baihoc.html">Bài học</a>
+    <a href="lienhe.html">Liên hệ</a>
+  </nav>
+
   <main>
-    <h1>📩 Liên hệ với Thầy</h1>
-    <form>
-      <label for="name">Họ và tên:</label><br>
-      <input type="text" id="name" name="name"><br><br>
-      <label for="message">Nội dung:</label><br>
-      <textarea id="message" name="message" rows="5" cols="40"></textarea><br><br>
-      <button type="submit">Gửi</button>
+    <form name="lienhe" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="lienhe">
+      
+      <label for="name">👤 Họ và tên học sinh:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="class">🏫 Lớp:</label>
+      <input type="text" id="class" name="class" required>
+
+      <label for="message">✉️ Nội dung tin nhắn:</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+
+      <button type="submit">Gửi tin nhắn</button>
     </form>
-
-    <h1>📘 Website Toán lớp 5 – Kết nối tri thức</h1>
-    <p>Chào mừng các em học sinh đến với trang học Toán lớp 5 theo chương trình <strong>Kết nối tri thức với cuộc sống</strong>.</p>
-    <p>Trang web này giúp các em:</p>
-    <ul>
-      <li>🧠 Tìm hiểu kiến thức mới dễ hiểu, sinh động</li>
-      <li>✍️ Luyện tập trực tuyến, chấm điểm tự động</li>
-      <li>🎮 Chơi trò chơi Toán học thú vị</li>
-      <li>📥 Tải bài giảng PowerPoint, tài liệu PDF</li>
-    </ul>
   </main>
-
-  <div class="footer">
-    © 2025 – Thiết kế bởi Thầy Long | Website dạy Toán lớp 5
-  </div>
 
 </body>
 </html>
