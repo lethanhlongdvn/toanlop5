@@ -1,75 +1,95 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Trang chủ - Toán lớp 5</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Toán lớp 5 - Trang chủ</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f9f9f9;
       margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f4f8;
     }
     header {
-      background-color: #2c3e50;
-      padding: 15px 0;
+      background-image: url('https://images.unsplash.com/photo-1603575448374-b0d9c83c00ef?auto=format&fit=crop&w=1400&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 60px 20px;
       text-align: center;
-      color: white;
     }
-    nav {
-      display: flex;
-      justify-content: center;
-      background-color: #34495e;
+    header h1 {
+      font-size: 2.5em;
+      margin: 0;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
     }
-    nav a {
-      color: white;
-      text-decoration: none;
-      padding: 14px 20px;
-      display: inline-block;
+    header p {
+      font-size: 1.2em;
+      margin-top: 10px;
     }
-    nav a:hover {
-      background-color: #2c3e50;
-    }
-    main {
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
       padding: 30px;
-      max-width: 800px;
-      margin: auto;
-      background-color: #ffffff;
-      margin-top: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      max-width: 1000px;
+      margin: 0 auto;
+      background-image: url('https://i.imgur.com/70WrLMr.png');
+      background-size: cover;
+      background-position: center;
+      border-radius: 12px;
     }
-    h1 {
+    .menu-item {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      text-align: center;
+      padding: 30px 20px;
+      text-decoration: none;
       color: #2c3e50;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+    .menu-item:hover {
+      transform: scale(1.05);
+    }
+    .menu-item h2 {
+      margin: 10px 0 0;
+      font-size: 1.2em;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #666;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Website Toán lớp 5 – Kết nối tri thức</h1>
-  </header>
+<header>
+  <h1>Website Toán lớp 5 – Kết nối tri thức</h1>
+  <p>Học vui – Học chủ động – Học hiệu quả</p>
+</header>
 
-  <nav>
-    <a href="index.html">Trang chủ</a>
-    <a href="baihoc.html">Bài học</a>
-    <a href="lienhe.html">Liên hệ</a>
-  </nav>
+<section class="menu">
+  <a href="index.html" class="menu-item">
+    <img src="https://img.icons8.com/ios-filled/50/000000/home.png"/>
+    <h2>Trang chủ</h2>
+  </a>
+  <a href="baihoc.html" class="menu-item">
+    <img src="https://img.icons8.com/ios-filled/50/000000/open-book--v1.png"/>
+    <h2>Bài học</h2>
+  </a>
+  <a href="lienhe.html" class="menu-item">
+    <img src="https://img.icons8.com/ios-filled/50/000000/message-group.png"/>
+    <h2>Liên hệ</h2>
+  </a>
+</section>
 
-  <main>
-    <h2>🎯 Mục tiêu website</h2>
-    <p>Trang web này nhằm hỗ trợ học sinh lớp 5 học môn Toán theo chương trình sách giáo khoa <strong>Kết nối tri thức với cuộc sống</strong>.</p>
-
-    <h2>🎁 Lợi ích</h2>
-    <ul>
-      <li>📖 Học kiến thức mới dễ hiểu, trực quan</li>
-      <li>✍️ Luyện tập có chấm điểm tự động</li>
-      <li>🎮 Trò chơi Toán học sinh động</li>
-      <li>📥 Tải bài giảng, phiếu bài tập</li>
-      <li>📊 Xem kết quả học tập (nếu có đăng nhập)</li>
-    </ul>
-  </main>
+<footer>
+  &copy; 2025 Thầy Long – Trường Tiểu học Dừa Đỏ
+</footer>
 
 </body>
 </html>
