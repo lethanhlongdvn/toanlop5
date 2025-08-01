@@ -1,98 +1,134 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Website Toán lớp 5 - Trang chủ</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trang chủ - Toán lớp 5</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background-color: #f0f4f8;
+      color: #333;
     }
     header {
-      background-image: url('nen.jpg');
-      background-size: cover;
-      background-position: center;
+      background-color: #1976d2;
       color: white;
       padding: 60px 20px;
       text-align: center;
     }
-   header h1 {
-  font-size: 2.5em;
-  margin: 0;
-  color: #0066cc; /* Màu xanh dương */
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
-}
-
-header p {
-  font-size: 1.5em;
-  margin-top: 10px;
-  color: #1e88e5; /* Cũng là xanh dương */
-}
-    .menu {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      padding: 30px;
-      max-width: 1000px;
-      margin: 0 auto;
-      background-image: url('nen3.png');
-      background-size: cover;
-      background-position: center;
-      border-radius: 12px;
+    header h1 {
+      font-size: 2.8em;
+      margin: 0;
     }
-    .menu-item {
-      background-color: rgba(255, 255, 255, 0.9);
-      border-radius: 12px;
-      text-align: center;
-      padding: 30px 20px;
+    header p {
+      font-size: 1.3em;
+      margin-top: 10px;
+    }
+    nav {
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 10px 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    nav li {
+      margin: 5px 10px;
+    }
+    nav a {
       text-decoration: none;
-      color: #2c3e50;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      transition: transform 0.2s ease;
+      color: #1976d2;
+      font-weight: bold;
+      padding: 10px 16px;
+      border-radius: 6px;
+      transition: background-color 0.2s ease;
     }
-    .menu-item:hover {
-      transform: scale(1.05);
+    nav a:hover {
+      background-color: #e3f2fd;
     }
-    .menu-item h2 {
-      margin: 10px 0 0;
-      font-size: 1.2em;
+    .featured {
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .featured h2 {
+      text-align: center;
+      color: #1976d2;
+    }
+    .course-list {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .course-item {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .course-item h3 {
+      margin: 0;
+      color: #1976d2;
     }
     footer {
       text-align: center;
       padding: 20px;
-      font-size: 0.9em;
-      color: #666;
+      background-color: #e3f2fd;
+      color: #333;
     }
   </style>
 </head>
 <body>
+  <header>
+    <h1>TOÁN LỚP 5 - KẾT NỐI TRI THỨC</h1>
+    <p>Học vui – Học chủ động – Học hiệu quả</p>
+  </header>
 
-<header>
-  <h1>TOÁN LỚP 5 - KẾT NỐI TRI THỨC</h1>
-  <p>Học vui – Học chủ động – Học hiệu quả</p>
-</header>
+  <nav>
+    <ul>
+      <li><a href="index.html">🏠 Giới thiệu</a></li>
+      <li><a href="baihoc.html">📘 Bài học</a></li>
+      <li><a href="luyentap.html">✍️ Luyện tập</a></li>
+      <li><a href="trochoi.html">🎮 Trò chơi</a></li>
+      <li><a href="tailieu.html">📥 Tài liệu</a></li>
+      <li><a href="lienhe.html">📩 Liên hệ</a></li>
+    </ul>
+  </nav>
 
-<section class="menu">
-  <a href="index.html" class="menu-item">
-    <img src="https://img.icons8.com/ios-filled/50/000000/home.png"/>
-    <h2>Trang chủ</h2>
-  </a>
-  <a href="baihoc.html" class="menu-item">
-    <img src="https://img.icons8.com/ios-filled/50/000000/open-book--v1.png"/>
-    <h2>Bài học</h2>
-  </a>
-  <a href="lienhe.html" class="menu-item">
-    <img src="https://img.icons8.com/ios-filled/50/000000/message-group.png"/>
-    <h2>Liên hệ</h2>
-  </a>
-</section>
+  <section class="featured">
+    <h2>📚 Bài học mới nhất</h2>
+    <div class="course-list">
+      <div class="course-item">
+        <h3>Tuần 1: Ôn tập đầu năm</h3>
+        <p>Ôn tập các phép tính và biểu thức cơ bản</p>
+      </div>
+      <div class="course-item">
+        <h3>Tuần 2: Phân số</h3>
+        <p>Giới thiệu về phân số và cách đọc viết</p>
+      </div>
+      <div class="course-item">
+        <h3>Tuần 3: So sánh phân số</h3>
+        <p>Các phương pháp so sánh phân số đơn giản</p>
+      </div>
+      <div class="course-item">
+        <h3>Tuần 4: Phép cộng phân số</h3>
+        <p>Thực hiện phép cộng hai phân số</p>
+      </div>
+      <div class="course-item">
+        <h3>Tuần 5: Phép trừ phân số</h3>
+        <p>Thực hiện phép trừ hai phân số cùng mẫu</p>
+      </div>
+    </div>
+  </section>
 
-<footer>
-  &copy; 2025 Thầy Long – Trường Tiểu học Dừa Đỏ
-</footer>
-
+  <footer>
+    © 2025 Thầy Long – Toán lớp 5 – Kết nối tri thức
+  </footer>
 </body>
 </html>
