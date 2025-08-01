@@ -1,20 +1,94 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trang chủ - Toán lớp 5</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f4f8;
+      color: #333;
+    }
+    header {
+      background-color: #1976d2;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.8em;
+      margin: 0;
+    }
+    header p {
+      font-size: 1.3em;
+      margin-top: 10px;
+    }
+    nav {
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 10px 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    nav li {
+      margin: 5px 10px;
+    }
+    nav a {
+      text-decoration: none;
+      color: #1976d2;
+      font-weight: bold;
+      padding: 10px 16px;
+      border-radius: 6px;
+      transition: background-color 0.2s ease;
+    }
+    nav a:hover {
+      background-color: #e3f2fd;
+    }
+    .featured {
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .featured h2 {
+      text-align: center;
+      color: #1976d2;
+    }
+    .course-list {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .course-item {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .course-item h3 {
+      margin: 0;
+      color: #1976d2;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #e3f2fd;
+      color: #333;
+    }
+  </style>
+</head>
 <body>
   <header>
-    <h1>TOÁN LỚP 5 – KẾT NỐI TRI THỨC</h1>
-    <p>Học vui – Học chủ động – Học hiệu quả</p>
+    <h1>TOÁN LỚP 5 - KẾT NỐI TRI THỨC</h1>
+    <p>Học vui – Học chủ động – Học hiệu quả</p>
   </header>
-
-  <!-- Đoạn giới thiệu thân thiện -->
-  <section style="max-width:800px; margin:20px auto; padding:0 20px; line-height:1.6;">
-    <p><strong>Chào mừng bạn đến với website Toán lớp 5 – Kết nối tri thức!</strong> Đây là nơi học sinh có thể học Toán một cách vui vẻ, chủ động và hiệu quả thông qua:</p>
-    <ul>
-      <li>✅ <strong>Bài học sinh động</strong> sát chương trình SGK</li>
-      <li>✅ <strong>Luyện tập có chấm điểm tự động</strong></li>
-      <li>✅ <strong>Trò chơi Toán học hấp dẫn</strong></li>
-      <li>✅ <strong>Tài liệu hỗ trợ học tập đầy đủ</strong></li>
-    </ul>
-    <p>Với sự hướng dẫn tận tình của giáo viên và tinh thần tự học của các em, website này sẽ là <strong>người bạn đồng hành tin cậy</strong> trên hành trình chinh phục Toán lớp 5.</p>
-  </section>
 
   <nav>
     <ul>
@@ -26,7 +100,35 @@
       <li><a href="lienhe.html">📩 Liên hệ</a></li>
     </ul>
   </nav>
-  
-  <!-- Phần bài học mới nhất... tiếp theo -->
 
+  <section class="featured">
+    <h2>📚 Bài học mới nhất</h2>
+    <div class="course-list">
+      <div class="course-item">
+        <h3>Tuần 1: Ôn tập đầu năm</h3>
+        <p>Ôn tập các phép tính và biểu thức cơ bản</p>
+      </div>
+      <div class="course-item">
+        <h3>Tuần 2: Phân số</h3>
+        <p>Giới thiệu về phân số và cách đọc viết</p>
+      </div>
+      <div class="course-item">
+        <h3>Tuần 3: So sánh phân số</h3>
+        <p>Các phương pháp so sánh phân số đơn giản</p>
+      </div>
+      <div class="course-item">
+        <h3>Tuần 4: Phép cộng phân số</h3>
+        <p>Thực hiện phép cộng hai phân số</p>
+      </div>
+      <div class="course-item">
+        <h3>Tuần 5: Phép trừ phân số</h3>
+        <p>Thực hiện phép trừ hai phân số cùng mẫu</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Thầy Long – Toán lớp 5 – Kết nối tri thức
+  </footer>
 </body>
+</html>
