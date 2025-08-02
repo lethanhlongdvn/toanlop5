@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tiết 3 – Ôn tập các phép tính với số tự nhiên</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background: #1976d2;
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.4em;
+    }
+    header p {
+      margin-top: 10px;
+      font-size: 1.2em;
+    }
+    section {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    section h2 {
+      border-bottom: 2px solid #1976d2;
+      padding-bottom: 6px;
+      color: #1976d2;
+    }
+    .practice iframe {
+      width: 100%;
+      border: none;
+      height: 680px;
+    }
+    iframe.slides {
+      width: 100%;
+      height: 480px;
+      border: none;
+    }
+    .placeholder {
+      background: #eee;
+      padding: 10px;
+      margin: 20px 0;
+      border: 1px dashed #999;
+      text-align: center;
+      color: #888;
+    }
+    .game-link, .download-link {
+      display: inline-block;
+      margin: 15px 0;
+      padding: 10px 16px;
+      background: #1976d2;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #e3f2fd;
+      color: #333;
+    }
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.6em; }
+      header p { font-size: 1em; }
+      section { padding: 0 12px; }
+      .game-link, .download-link { width: 100%; text-align: center; }
+      .practice iframe { height: 740px; }
+      iframe.slides { height: 340px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Tiết 3: Ôn tập các phép tính với số tự nhiên</h1>
+  <p>Ôn tập cộng, trừ, nhân, chia và vận dụng vào thực tế</p>
+</header>
+
+<section>
+  <h2>🧠 Kiến thức cần nhớ</h2>
+  <ul>
+    <li>Thực hiện phép cộng, trừ, nhân, chia số tự nhiên.</li>
+    <li>Nhận biết biểu thức có giá trị bằng nhau.</li>
+    <li>Vận dụng tính toán vào tình huống thực tế.</li>
+    <li>Sử dụng cách nhóm số, làm tròn để tính nhanh.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>📽️ Bài giảng trình chiếu</h2>
+  <iframe class="slides" src="https://docs.google.com/presentation/d/e/2PACX-1vR7M26dFTgouubLxleBo-14ERnr7HQk9LRYQEW4TOnQ1knwjgsSZ8cB7Dwq_1B73Q/pubembed?start=false&loop=false&delayms=30000" allowfullscreen></iframe>
+</section>
+
+<section class="practice">
+  <h2>✍️ Luyện tập</h2>
+  <iframe src="https://forms.gle/8mXstEgmA7JEmU2x5">Loading…</iframe>
+</section>
+
+<section>
+  <h2>🎮 Trò chơi Toán học</h2>
+  <div class="placeholder">[Chèn liên kết game tại đây]</div>
+</section>
+
+<section>
+  <h2>📥 Tài liệu hỗ trợ</h2>
+  <div class="placeholder">[Chèn liên kết tải tài liệu tại đây]</div>
+</section>
+
+<section style="text-align: center; margin-top: 40px;">
+  <a href="index.html" class="download-link">⬅️ Quay về trang chủ</a>
+</section>
+
+<footer>
+  &copy; 2025 Thầy Long – Toán lớp 5 – Kết nối tri thức
+</footer>
+
+</body>
+</html>
