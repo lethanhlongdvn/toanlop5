@@ -1,92 +1,76 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tiết 1 – Ôn tập số tự nhiên</title>
-  <style>
-    body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background: #f9f9f9; color: #333; }
-    header { background: #1976d2; color: #fff; padding: 40px 20px; text-align: center; }
-    header h1 { margin: 0; font-size: 2.4em; }
-    header p { margin-top: 10px; font-size: 1.2em; }
-    section { max-width: 800px; margin: 30px auto; padding: 0 20px; }
-    section h2 { border-bottom: 2px solid #1976d2; padding-bottom: 6px; color: #1976d2; }
-    form { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-    label { display: block; margin-top: 16px; font-weight: bold; }
-    input[type="text"], textarea { width: 100%; padding: 8px; margin-top: 4px; }
-    button { margin-top: 20px; padding: 10px 20px; background-color: #1976d2; color: white; border: none; border-radius: 4px; cursor: pointer; }
-    .game-link { display: inline-block; margin: 15px 0; padding: 10px 16px; background: #1976d2; color: #fff; text-decoration: none; border-radius: 6px; }
-    footer { text-align: center; padding: 20px; background: #e3f2fd; color: #333; }
-    @media (max-width: 600px) {
-      header h1 { font-size: 1.6em; }
-      header p { font-size: 1em; }
-      section { padding: 0 12px; }
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tiết 1 – Ôn tập số tự nhiên</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background: #f9f9f9; color: #333; }
+    header { background: #1976d2; color: #fff; padding: 40px 20px; text-align: center; }
+    header h1 { margin: 0; font-size: 2.4em; }
+    header p { margin-top: 10px; font-size: 1.2em; }
+    section { max-width: 800px; margin: 30px auto; padding: 0 20px; }
+    section h2 { border-bottom: 2px solid #1976d2; padding-bottom: 6px; color: #1976d2; }
+    form { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    label { display: block; margin-top: 16px; font-weight: bold; }
+    input[type="text"], textarea { width: 100%; padding: 8px; margin-top: 4px; }
+    button { margin-top: 20px; padding: 10px 20px; background-color: #1976d2; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    .game-link { display: inline-block; margin: 15px 0; padding: 10px 16px; background: #1976d2; color: #fff; text-decoration: none; border-radius: 6px; }
+    footer { text-align: center; padding: 20px; background: #e3f2fd; color: #333; }
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.6em; }
+      header p { font-size: 1em; }
+      section { padding: 0 12px; }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Tiết 1: Ôn tập số tự nhiên</h1>
-    <p>Mục tiêu: Đọc, viết, so sánh và biểu diễn số tự nhiên trong đời sống</p>
-  </header>
+  <header>
+    <h1>Tiết 1: Ôn tập số tự nhiên</h1>
+    <p>Mục tiêu: Đọc, viết, so sánh và biểu diễn số tự nhiên trong đời sống</p>
+  </header>
 
-  <section>
-    <h2>✍️ Luyện tập</h2>
-    <form id="answerForm">
-      <label>Họ và tên học sinh:</label>
-      <input type="text" name="hoten" required />
-      <label>Lớp:</label>
-      <input type="text" name="lop" required />
-      <label>1.1. Viết số (3 chục triệu, 8 nghìn, 2 chục và 1 đơn vị):</label>
-      <input type="text" name="q1_1_viet" />
-      <label>1.1. Đọc số:</label>
-      <input type="text" name="q1_1_doc" />
-      <label>1.2. Viết số (8 trăm nghìn, 2 chục nghìn, 1 chục và 5 đơn vị):</label>
-      <input type="text" name="q1_2_viet" />
-      <label>1.2. Đọc số:</label>
-      <input type="text" name="q1_2_doc" />
-      <label>1.3. Viết số (1 triệu, 2 trăm nghìn, 3 trăm, 2 chục và 4 đơn vị):</label>
-      <input type="text" name="q1_3_viet" />
-      <label>1.3. Đọc số:</label>
-      <input type="text" name="q1_3_doc" />
-      <label>2.1. 504 842 = 500 000 + 4 000 + ___ + 40 + 2:</label>
-      <input type="text" name="q2_1" />
-      <label>2.2. 1 730 539 = 1 000 000 + ___ + 30 000 + 500 + 30 + 9:</label>
-      <input type="text" name="q2_2" />
-      <label>2.3. 26 400 500 = 20 000 000 + 6 000 000 + 400 000 + ___:</label>
-      <input type="text" name="q2_3" />
-      <label>3.1. Ngày Nhà giáo Việt Nam (20/11/2024), Rô-bốt sẽ viết:</label>
-      <input type="text" name="q3_1" />
-      <label>3.2. Chữ số 2 đầu tiên có giá trị là:</label>
-      <input type="text" name="q3_2a" />
-      <label>3.2. Chữ số 2 thứ hai có giá trị là:</label>
-      <input type="text" name="q3_2b" />
-      <label>3.2. Chữ số 2 thứ ba có giá trị là:</label>
-      <input type="text" name="q3_2c" />
-      <label>4.1. Suy luận: Việt: 2 032, Nam: 2 028. Hỏi mũ của Rô-bốt là số nào?</label>
-      <input type="text" name="q4_1" />
-      <button type="submit">Gửi câu trả lời</button>
-    </form>
-  </section>
+  <section>
+    <h2>✍️ Luyện tập</h2>
+        <form method="POST" action="https://formspree.io/f/mblkalek">
+      <label>Họ và tên học sinh:</label>
+      <input type="text" name="hoten" required />
+      <label>Lớp:</label>
+      <input type="text" name="lop" required />
+      <label>1.1. Viết số (3 chục triệu, 8 nghìn, 2 chục và 1 đơn vị):</label>
+      <input type="text" name="q1_1_viet" />
+      <label>1.1. Đọc số:</label>
+      <input type="text" name="q1_1_doc" />
+      <label>1.2. Viết số (8 trăm nghìn, 2 chục nghìn, 1 chục và 5 đơn vị):</label>
+      <input type="text" name="q1_2_viet" />
+      <label>1.2. Đọc số:</label>
+      <input type="text" name="q1_2_doc" />
+      <label>1.3. Viết số (1 triệu, 2 trăm nghìn, 3 trăm, 2 chục và 4 đơn vị):</label>
+      <input type="text" name="q1_3_viet" />
+      <label>1.3. Đọc số:</label>
+      <input type="text" name="q1_3_doc" />
+      <label>2.1. 504 842 = 500 000 + 4 000 + ___ + 40 + 2:</label>
+      <input type="text" name="q2_1" />
+      <label>2.2. 1 730 539 = 1 000 000 + ___ + 30 000 + 500 + 30 + 9:</label>
+      <input type="text" name="q2_2" />
+      <label>2.3. 26 400 500 = 20 000 000 + 6 000 000 + 400 000 + ___:</label>
+      <input type="text" name="q2_3" />
+      <label>3.1. Ngày Nhà giáo Việt Nam (20/11/2024), Rô-bốt sẽ viết:</label>
+      <input type="text" name="q3_1" />
+      <label>3.2. Chữ số 2 đầu tiên có giá trị là:</label>
+      <input type="text" name="q3_2a" />
+      <label>3.2. Chữ số 2 thứ hai có giá trị là:</label>
+      <input type="text" name="q3_2b" />
+      <label>3.2. Chữ số 2 thứ ba có giá trị là:</label>
+      <input type="text" name="q3_2c" />
+      <label>4.1. Suy luận: Việt: 2 032, Nam: 2 028. Hỏi mũ của Rô-bốt là số nào?</label>
+      <input type="text" name="q4_1" />
+      <button type="submit">Gửi câu trả lời</button>
+    </form>
+  </section>
 
-  <footer>
-    &copy; 2025 Thầy Long – Toán lớp 5 – Kết nối tri thức
-  </footer>
-
-  <script>
-    const SHEET_URL = "https://script.google.com/macros/s/AKfycbxqP7bom1UU7lu_mU_Gaazt_t4ASBpiK44VX2Cq9V-tW64yqjH0PGZAv6N5P_fNmy9y/exec";
-    document.getElementById("answerForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      const formData = new FormData(this);
-      const data = {};
-      formData.forEach((value, key) => { data[key] = value; });
-      fetch(SHEET_URL, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" }
-      }).then(res => alert("✅ Đã gửi câu trả lời!")).catch(err => alert("❌ Lỗi khi gửi: " + err));
-      this.reset();
-    });
-  </script>
-</body>
+  <footer>
+    &copy; 2025 Thầy Long – Toán lớp 5 – Kết nối tri thức
+  </footer>
+  </body>
 </html>
