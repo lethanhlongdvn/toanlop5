@@ -99,8 +99,7 @@
         method: "POST",
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" }
-      }).then(res => alert("Đã gửi câu trả lời!"))
-        .catch(err => alert("Lỗi khi gửi: " + err));
+      }).then(res => alert("Đã gửi câu trả lời!")).catch(err => alert("Lỗi khi gửi: " + err));
       this.reset();
     });
   </script>
