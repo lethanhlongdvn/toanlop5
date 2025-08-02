@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -30,15 +29,6 @@
     <h1>Tiết 1: Ôn tập số tự nhiên</h1>
     <p>Mục tiêu: Đọc, viết, so sánh và biểu diễn số tự nhiên trong đời sống</p>
   </header>
-
-  <section>
-    <h2>🧠 Tìm hiểu kiến thức mới</h2>
-    <ul>
-      <li>Đọc - viết số tự nhiên</li>
-      <li>Viết số thành tổng theo hàng</li>
-      <li>So sánh số theo vị trí chữ số</li>
-    </ul>
-  </section>
 
   <section>
     <h2>✍️ Luyện tập</h2>
@@ -79,18 +69,12 @@
     </form>
   </section>
 
-  <section>
-    <h2>🎮 Trò chơi Toán học</h2>
-    <p>Bấm vào để chơi: chọn số lớn nhất trong dãy số.</p>
-    <a href="game/chon-so-lon.html" class="game-link" target="_blank">Chơi ngay</a>
-  </section>
-
   <footer>
     &copy; 2025 Thầy Long – Toán lớp 5 – Kết nối tri thức
   </footer>
 
   <script>
-    const SHEET_URL = "https://script.google.com/macros/s/AKfycbxqP7bom1UU7Iu_mU_Gaazt_t4ASBpiK44VX2Cq9V-tW64yqjH0PGZAv6N5P_fNmy9y/exec";
+    const SHEET_URL = "https://script.google.com/macros/s/AKfycbxqP7bom1UU7lu_mU_Gaazt_t4ASBpiK44VX2Cq9V-tW64yqjH0PGZAv6N5P_fNmy9y/exec";
     document.getElementById("answerForm").addEventListener("submit", function(event) {
       event.preventDefault();
       const formData = new FormData(this);
@@ -100,7 +84,7 @@
         method: "POST",
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" }
-      }).then(res => alert("Đã gửi câu trả lời!")).catch(err => alert("Lỗi khi gửi: " + err));
+      }).then(res => alert("✅ Đã gửi câu trả lời!")).catch(err => alert("❌ Lỗi khi gửi: " + err));
       this.reset();
     });
   </script>
