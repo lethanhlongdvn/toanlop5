@@ -13,11 +13,19 @@
       color: #333;
     }
     header {
-      background-color: #1976d2;
-      color: white;
-      padding: 5px 5px;
-      text-align: center;
-    }
+       background-image: url("images/banner-bg.jpg"); /* thay bằng đường dẫn ảnh */
+  background-size: cover;       /* ảnh phủ kín header */
+  background-position: center;  /* canh giữa */
+  background-repeat: no-repeat; /* không lặp lại */
+
+  /* Thêm overlay mờ nếu muốn chữ dễ đọc */
+  background-color: rgba(25, 118, 210, 0.7); /* xanh dương mờ */
+  background-blend-mode: multiply;
+
+  color: white;
+  padding: 20px 15px;
+  text-align: center;
+}
     header h1 {
       font-size: 2.0em; /* chữ chiếm 5% chiều ngang màn hình */
   margin: 0;
