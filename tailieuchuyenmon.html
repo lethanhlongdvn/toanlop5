@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tài liệu chuyên môn</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
+    h1 { color: #1976d2; text-align: center; }
+    .doc-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .doc-item {
+      background: white;
+      border: 1px solid #ddd;
+      padding: 12px;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: all 0.2s;
+    }
+    .doc-item:hover {
+      background: #e3f2fd;
+    }
+    a { text-decoration: none; color: #1976d2; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>📚 Tài liệu chuyên môn</h1>
+  <p style="text-align:center">Danh sách các tài liệu (thầy chèn link vào):</p>
+
+  <div class="doc-list">
+    <div class="doc-item"><a href="#">Phương pháp giảng dạy Toán</a></div>
+    <div class="doc-item"><a href="#">Đổi mới phương pháp Tiếng Việt</a></div>
+    <div class="doc-item"><a href="#">Ứng dụng CNTT trong giảng dạy</a></div>
+    <div class="doc-item"><a href="#">Phát triển năng lực học sinh</a></div>
+    <div class="doc-item"><a href="#">Đổi mới kiểm tra đánh giá</a></div>
+  </div>
+
+  <p style="text-align:center;margin-top:20px;">
+    <a href="index.html">⬅ Quay lại trang chính</a>
+  </p>
+
+  <script>
+    if (localStorage.getItem("isTeacher") !== "true") {
+      document.body.innerHTML = "<h2 style='color:red;text-align:center;'>Bạn không có quyền truy cập. Vui lòng <a href='index.html'>đăng nhập</a>.</h2>";
+    }
+  </script>
+</body>
+</html>
