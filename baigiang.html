@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Bài giảng trình chiếu</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; text-align: center; }
+    h1 { color: #388e3c; }
+    select {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-top: 15px;
+    }
+    .note {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎥 Bài giảng trình chiếu</h1>
+  <p>Chọn tuần để mở bài giảng:</p>
+
+  <select id="weekSelect">
+    <option value="">-- Chọn Tuần --</option>
+  </select>
+
+  <p class="note">Mỗi tuần sẽ liên kết đến trang riêng (ví dụ: <em>baigiang-tuan1.html</em>, <em>baigiang-tuan2.html</em>, …).</p>
+
+  <script>
+    // Kiểm tra đăng nhập
+    if (localStorage.getItem("isTeacher") !== "true") {
+      document.body.innerHTML = "<h2 style='color:red;text-align:center;'>Bạn không có quyền truy cập. Vui lòng <a href='index.html'>đăng nhập</a>.</h2>";
+    } else {
+      // Tạo danh sách tuần từ 1 đến 35
+      const select = document.getElementById("weekSelect");
+      for (let i = 1; i <= 35; i++) {
+        const opt = document.createElement("option");
+        opt.value = `baigiang-tuan${i}.html`;
+        opt.textContent = `Tuần ${i}`;
+        select.appendChild(opt);
+      }
+
+      // Chuyển hướng khi chọn tuần
+      select.addEventListener("change", function() {
+        if (this.value) {
+          window.location.href = this.value;
+        }
+      });
+    }
+  </script>
+</body>
+</html>
