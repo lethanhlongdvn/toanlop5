@@ -1,90 +1,74 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>Bài giảng trình chiếu</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0f4f8;
-      margin: 0;
+      font-family: Arial, sans-serif;
       padding: 20px;
     }
-    h1 {
-      text-align: center;
-      color: #1976d2;
-    }
-    .menu {
-      max-width: 400px;
-      margin: 20px auto;
-      text-align: center;
+    .hidden {
+      display: none;
     }
     select {
-      padding: 8px;
-      font-size: 1em;
-      border-radius: 6px;
-      border: 1px solid #1976d2;
+      padding: 5px;
+      font-size: 16px;
     }
-    .btn {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 8px 14px;
-      background: #1976d2;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .btn:hover {
-      background: #125699;
-    }
-    footer {
-      text-align: center;
-      margin-top: 40px;
-      padding: 10px;
-      background: #e3f2fd;
+    .content {
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-<script>
-  // Kiểm tra quyền truy cập
-  if (localStorage.getItem("role") !== "teacher") {
-    document.body.innerHTML = "<h2 style='color:red;text-align:center;'>Bạn không có quyền truy cập.<br> Vui lòng <a href='index.html'>đăng nhập</a>.</h2>";
-  }
-</script>
+  <h2>Bài giảng trình chiếu</h2>
 
-  <h1>📊 Bài giảng trình chiếu</h1>
-
-  <div class="menu">
-    <label for="weekSelect"><strong>Chọn tuần:</strong></label><br><br>
-    <select id="weekSelect">
-      <option value="">-- Chọn tuần --</option>
-      <!-- Tạo 35 tuần -->
-      <script>
-        for (let i = 1; i <= 35; i++) {
-          document.write(`<option value="week${i}.html">Tuần ${i}</option>`);
-        }
-      </script>
-    </select>
-    <br>
-    <button class="btn" onclick="goWeek()">Mở bài giảng</button>
+  <!-- Thông báo khi chưa đăng nhập -->
+  <div id="noAccess" class="hidden">
+    <p style="color: red;">Bạn không có quyền truy cập. Vui lòng đăng nhập.</p>
   </div>
 
-  <footer>
-    © 2025 Thầy Long – Bài giảng trình chiếu Toán lớp 5
-  </footer>
+  <!-- Nội dung khi đăng nhập -->
+  <div id="mainContent" class="hidden">
+    <label for="weekSelect">Chọn tuần:</label>
+    <select id="weekSelect">
+      <option value="">-- Chọn tuần --</option>
+    </select>
 
-<script>
-  function goWeek() {
-    const url = document.getElementById("weekSelect").value;
-    if (url) {
-      window.location.href = url; // thầy tạo sẵn file week1.html, week2.html... và chèn link PowerPoint/Google Slide
+    <div class="content" id="contentArea">
+      <p>Vui lòng chọn tuần để mở bài giảng.</p>
+    </div>
+  </div>
+
+  <script>
+    // Kiểm tra trạng thái đăng nhập
+    const loggedIn = localStorage.getItem("isLoggedIn");
+
+    const noAccess = document.getElementById("noAccess");
+    const mainContent = document.getElementById("mainContent");
+
+    if (loggedIn === "true") {
+      mainContent.classList.remove("hidden");
     } else {
-      alert("Vui lòng chọn tuần trước!");
+      noAccess.classList.remove("hidden");
     }
-  }
-</script>
+
+    // Tạo danh sách tuần 1 → 35
+    const weekSelect = document.getElementById("weekSelect");
+    for (let i = 1; i <= 35; i++) {
+      let option = document.createElement("option");
+      option.value = "tuan" + i + ".html"; // Link trang con tuần
+      option.textContent = "Tuần " + i;
+      weekSelect.appendChild(option);
+    }
+
+    // Khi chọn tuần → mở link tương ứng
+    weekSelect.addEventListener("change", function() {
+      const selectedPage = this.value;
+      if (selectedPage) {
+        window.location.href = selectedPage;
+      }
+    });
+  </script>
 </body>
 </html>
