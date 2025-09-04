@@ -1,136 +1,82 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tài liệu giảng dạy - Toán lớp 5</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tài liệu giảng dạy</title>
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f0f4f8;
-      color: #333;
-    }
-    header {
-      background-color: #1976d2;
-      color: white;
-      padding: 20px 15px;
-      text-align: center;
-    }
     nav {
-      background-color: white;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    nav ul {
-      display: flex;
-      list-style: none;
-      margin: 0;
-      padding: 10px 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    nav li {
-      margin: 5px 10px;
+      background: #1976d2;
+      padding: 10px;
     }
     nav a {
+      color: white;
+      margin-right: 15px;
       text-decoration: none;
-      color: #1976d2;
-      font-weight: bold;
-      padding: 10px 16px;
-      border-radius: 6px;
-      transition: background-color 0.2s ease;
+    }
+    .dropdown {
+      display: inline-block;
+      position: relative;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background: #f9f9f9;
+      min-width: 200px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    .dropdown-content a {
+      color: black;
+      padding: 8px 12px;
+      text-decoration: none;
       display: block;
     }
-    nav a:hover {
-      background-color: #e3f2fd;
+    .dropdown-content a:hover {
+      background: #ddd;
     }
-
-    .intro {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 20px;
-      background: white;
-      border-left: 5px solid #1976d2;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-
-    .resources {
-      max-width: 800px;
-      margin: 20px auto;
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    .resources h2 {
-      color: #1976d2;
-      margin-top: 0;
-    }
-    .resources ul {
-      list-style: none;
-      padding: 0;
-    }
-    .resources li {
-      margin: 8px 0;
-      padding: 10px;
-      border: 1px solid #e0e0e0;
-      border-radius: 6px;
-      transition: background-color 0.2s ease;
-    }
-    .resources li:hover {
-      background-color: #f9f9f9;
-    }
-
-    footer {
-      text-align: center;
-      padding: 10px;
-      background-color: #e3f2fd;
-      color: #333;
-      margin-top: 20px;
+    .dropdown:hover .dropdown-content {
+      display: block;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Tài liệu giảng dạy</h1>
-    <p>Dành cho giáo viên Toán lớp 5</p>
+    <nav>
+      <a href="index.html">Trang chủ</a>
+      <a href="baihoc.html">Bài học</a>
+      <a href="tailieu.html">Tài liệu</a>
+      <a href="#" id="logoutBtn" style="display:none;">Đăng xuất</a>
+    </nav>
   </header>
 
-  <nav>
-    <ul>
-      <li><a href="index.html">🏠 Trang chủ</a></li>
-      <li><a href="baihoc.html">📘 Bài học</a></li>
-      <li><a href="luyentap.html">✍️ Luyện tập</a></li>
-      <li><a href="trochoi.html">🎮 Trò chơi</a></li>
-      <li><a href="tailieu.html">📥 Tài liệu giảng dạy</a></li>
-      <li><a href="lienhe.html">📩 Liên hệ</a></li>
-    </ul>
-  </nav>
-
-  <section class="intro">
-    <p><strong>Lưu ý:</strong> Phần tài liệu bên dưới chỉ hiển thị khi đăng nhập bằng tài khoản <strong>Giáo viên</strong>.</p>
-  </section>
-
-  <section class="resources teacher-only" style="display:none;">
-    <h2>📥 Tài nguyên giảng dạy</h2>
-    <ul>
-      <li>📄 <a href="#">Giáo án Word</a></li>
-      <li>📊 <a href="#">Bài giảng trình chiếu (PowerPoint)</a></li>
-      <li>📚 <a href="#">Tài liệu chuyên môn</a></li>
-    </ul>
-  </section>
-
-  <footer>
-    © 2025 Thầy Long – Toán lớp 5 – Kết nối tri thức
-  </footer>
+  <main id="resourceSection">
+    <p>Bạn cần đăng nhập để xem tài nguyên.</p>
+  </main>
 
   <script>
-    // Kiểm tra vai trò
-    const isTeacher = localStorage.getItem("role") === "teacher";
-    const teacherResources = document.querySelector(".teacher-only");
-    if (isTeacher) {
-      teacherResources.style.display = "block";
-    }
+    document.addEventListener("DOMContentLoaded", () => {
+      if (localStorage.getItem("loggedIn") === "true") {
+        document.getElementById("resourceSection").innerHTML = `
+          <h2>Tài nguyên cho giáo viên</h2>
+          <div class="dropdown">
+            <button>Danh mục tài liệu</button>
+            <div class="dropdown-content">
+              <a href="#">GIÁO ÁN WORD</a>
+              <a href="#">BÀI GIẢNG TRÌNH CHIẾU</a>
+              <a href="#">TÀI LIỆU CHUYÊN MÔN</a>
+            </div>
+          </div>
+        `;
+        document.getElementById("logoutBtn").style.display = "inline";
+      }
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.removeItem("loggedIn");
+      window.location.href = "index.html";
+    });
   </script>
 </body>
 </html>
