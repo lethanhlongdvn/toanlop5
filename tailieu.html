@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tài liệu giảng dạy - Toán lớp 5</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f4f8;
+      color: #333;
+    }
+    header {
+      background-color: #1976d2;
+      color: white;
+      padding: 20px 15px;
+      text-align: center;
+    }
+    nav {
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 10px 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    nav li {
+      margin: 5px 10px;
+      position: relative; /* để làm dropdown */
+    }
+    nav a {
+      text-decoration: none;
+      color: #1976d2;
+      font-weight: bold;
+      padding: 10px 16px;
+      border-radius: 6px;
+      transition: background-color 0.2s ease;
+      display: block;
+    }
+    nav a:hover {
+      background-color: #e3f2fd;
+    }
+    /* Dropdown menu */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 40px;
+      left: 0;
+      background-color: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      min-width: 200px;
+      border-radius: 6px;
+      z-index: 1000;
+    }
+    .dropdown-content a {
+      padding: 10px 16px;
+      color: #1976d2;
+      font-weight: normal;
+    }
+    .dropdown-content a:hover {
+      background-color: #e3f2fd;
+    }
+    nav li:hover .dropdown-content {
+      display: block;
+    }
+
+    .intro {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-left: 5px solid #1976d2;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #e3f2fd;
+      color: #333;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Tài liệu giảng dạy</h1>
+    <p>Dành cho giáo viên Toán lớp 5</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">🏠 Trang chủ</a></li>
+      <li><a href="baihoc.html">📘 Bài học</a></li>
+      <li><a href="luyentap.html">✍️ Luyện tập</a></li>
+      <li><a href="trochoi.html">🎮 Trò chơi</a></li>
+      <li>
+        <a href="#">📥 Tài liệu giảng dạy ▼</a>
+        <div class="dropdown-content teacher-only">
+          <a href="#">📄 Giáo án Word</a>
+          <a href="#">📊 Bài giảng trình chiếu</a>
+          <a href="#">📚 Tài liệu chuyên môn</a>
+        </div>
+      </li>
+      <li><a href="lienhe.html">📩 Liên hệ</a></li>
+    </ul>
+  </nav>
+
+  <section class="intro">
+    <p><strong>Chú ý:</strong> Phần tài liệu giảng dạy chỉ hiện khi đăng nhập tài khoản <strong>Giáo viên</strong>.  
+    Nếu bạn là <em>học sinh</em>, bạn sẽ không thấy menu này.</p>
+  </section>
+
+  <footer>
+    © 2025 Thầy Long – Toán lớp 5 – Kết nối tri thức
+  </footer>
+
+  <script>
+    // Kiểm tra role lưu trong localStorage
+    const isTeacher = localStorage.getItem("role") === "teacher";
+    const teacherSections = document.querySelectorAll(".teacher-only");
+    teacherSections.forEach(section => {
+      section.style.display = isTeacher ? "block" : "none";
+    });
+  </script>
+</body>
+</html>
