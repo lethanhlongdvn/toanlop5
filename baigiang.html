@@ -25,9 +25,7 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       border-radius: 8px;
     }
-    .hidden {
-      display: none;
-    }
+    .hidden { display: none; }
     select {
       padding: 8px;
       font-size: 1em;
@@ -41,9 +39,7 @@
       cursor: pointer;
       margin-left: 8px;
     }
-    button:hover {
-      background: #0d47a1;
-    }
+    button:hover { background: #0d47a1; }
   </style>
 </head>
 <body>
@@ -62,7 +58,6 @@
     <h2>Chọn tuần để xem bài giảng</h2>
     <select id="weekSelect">
       <option value="">-- Chọn Tuần --</option>
-      <!-- Tuần 1 đến 35 -->
       <script>
         for (let i = 1; i <= 35; i++) {
           document.write(`<option value="tuan${i}.html">Tuần ${i}</option>`);
@@ -73,19 +68,15 @@
   </div>
 
   <script>
-    // kiểm tra trạng thái đăng nhập
-    const loggedIn = localStorage.getItem("isLoggedIn");
+    // kiểm tra trạng thái đăng nhập giống index.html
+    const role = localStorage.getItem("role");
 
-    const noAccess = document.getElementById("noAccess");
-    const mainContent = document.getElementById("mainContent");
-
-    if (loggedIn === "true") {
-      mainContent.classList.remove("hidden");
+    if (role === "teacher") {
+      document.getElementById("mainContent").classList.remove("hidden");
     } else {
-      noAccess.classList.remove("hidden");
+      document.getElementById("noAccess").classList.remove("hidden");
     }
 
-    // chuyển đến trang tuần
     function goWeek() {
       const select = document.getElementById("weekSelect");
       const link = select.value;
