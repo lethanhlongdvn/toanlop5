@@ -1,156 +1,75 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Trang chủ - Toán lớp 5</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang chủ</title>
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f0f4f8;
-      color: #333;
+    nav {
+      background: #1976d2;
+      padding: 10px;
     }
-    header {
-      background-image: url("banner1.png");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      color: white;
-      padding: 20px 15px;
-      text-align: center;
-      height: 200px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    header h1 { font-size: 2.0em; margin: 0; }
-    header p { font-size: 1.2em; margin-top: 5px; }
-
-    nav { background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    nav ul {
-      display: flex; list-style: none;
-      margin: 0; padding: 10px 20px;
-      justify-content: center; flex-wrap: wrap;
-    }
-    nav li { margin: 5px 10px; }
     nav a {
-      text-decoration: none; color: #1976d2;
-      font-weight: bold; padding: 10px 16px;
-      border-radius: 6px;
+      color: white;
+      margin-right: 15px;
+      text-decoration: none;
     }
-    nav a:hover { background-color: #e3f2fd; }
-
-    .intro {
-      max-width: 800px; margin: 15px auto;
-      background: #fff; border-left: 5px solid #1976d2;
-      padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-    footer {
-      text-align: center; padding: 10px;
-      background-color: #e3f2fd; color: #333;
-    }
-
-    /* Hộp đăng nhập */
-    .login-box {
-      position: fixed; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      background: white; padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-      text-align: center; display: none;
-    }
-    .login-box input {
-      width: 90%; padding: 8px;
-      margin: 8px 0; border: 1px solid #ccc; border-radius: 5px;
-    }
-    .login-box button {
-      padding: 8px 15px; margin-top: 10px;
-      background: #1976d2; color: white; border: none;
-      border-radius: 5px; cursor: pointer;
-    }
-    .hidden { display: none; }
   </style>
 </head>
 <body>
   <header>
-    <h1>Toán lớp 5 – Kết nối tri thức</h1>
-    <p>Học vui – Hiểu sâu – Ứng dụng tốt</p>
+    <h1>Website Học Tập</h1>
+    <nav>
+      <a href="index.html">Trang chủ</a>
+      <a href="baihoc.html">Bài học</a>
+      <a href="tailieu.html" id="menu-tailieu" style="display:none;">Tài liệu</a>
+      <a href="#" id="logoutBtn" style="display:none;">Đăng xuất</a>
+    </nav>
   </header>
 
-  <nav>
-    <ul>
-      <li><a href="index.html">🏠 Giới thiệu</a></li>
-      <li><a href="baihoc.html">📘 Bài học</a></li>
-      <li><a href="luyentap.html">✍️ Luyện tập</a></li>
-      <li><a href="trochoi.html">🎮 Trò chơi</a></li>
-      <li><a href="tailieu.html" id="menu-tlgd" class="hidden">📥 Tài liệu giảng dạy</a></li>
-      <li><a href="#" onclick="openLogin()">🔑 Đăng nhập GV</a></li>
-      <li><a href="#" onclick="logout()" id="logoutBtn" class="hidden">🚪 Đăng xuất</a></li>
-    </ul>
-  </nav>
-
-  <section class="intro">
-    <p><strong>Chào mừng bạn đến với trang Toán lớp 5 – Kết nối tri thức!</strong><br>
-    Đây là nơi học sinh có thể <strong>học Toán một cách vui vẻ, chủ động và hiệu quả</strong> thông qua:</p>
-    <ul>
-      <li>✅ Bài học sinh động sát chương trình SGK</li>
-      <li>✅ Luyện tập có chấm điểm tự động</li>
-      <li>✅ Trò chơi Toán học hấp dẫn</li>
-      <li>✅ Tài liệu hỗ trợ học tập đầy đủ</li>
-    </ul>
-  </section>
-
-  <footer>
-    © 2025 Thầy Long – Toán lớp 5 – Kết nối tri thức
-  </footer>
-
-  <!-- Hộp đăng nhập -->
-  <div id="loginBox" class="login-box">
-    <h3>Đăng nhập giáo viên</h3>
-    <input type="text" id="username" placeholder="Tên đăng nhập"><br>
-    <input type="password" id="password" placeholder="Mật khẩu"><br>
-    <button onclick="login()">Đăng nhập</button>
-    <button onclick="closeLogin()">Đóng</button>
-    <p id="message" style="color:red;"></p>
-  </div>
+  <main>
+    <h2>Đăng nhập dành cho giáo viên</h2>
+    <form id="loginForm">
+      <label>Tên đăng nhập: <input type="text" id="username"></label><br><br>
+      <label>Mật khẩu: <input type="password" id="password"></label><br><br>
+      <button type="submit">Đăng nhập</button>
+    </form>
+    <p id="loginMessage" style="color:red;"></p>
+  </main>
 
   <script>
-    // Mở/đóng form
-    function openLogin() { document.getElementById("loginBox").style.display = "block"; }
-    function closeLogin() { document.getElementById("loginBox").style.display = "none"; }
+    // kiểm tra trạng thái login khi tải trang
+    document.addEventListener("DOMContentLoaded", () => {
+      if (localStorage.getItem("loggedIn") === "true") {
+        document.getElementById("menu-tailieu").style.display = "inline";
+        document.getElementById("logoutBtn").style.display = "inline";
+        document.getElementById("loginForm").style.display = "none";
+        document.getElementById("loginMessage").innerText = "Bạn đã đăng nhập.";
+      }
+    });
 
-    // Đăng nhập
-    function login() {
-      let user = document.getElementById("username").value;
-      let pass = document.getElementById("password").value;
+    // xử lý form login
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
 
-      if (user === "giaovien" && pass === "matkhau123") {
-        localStorage.setItem("isTeacher", "true");
-        document.getElementById("menu-tlgd").classList.remove("hidden");
-        document.getElementById("logoutBtn").classList.remove("hidden");
-        closeLogin();
-        alert("Đăng nhập thành công!");
+      if (username === "lethanhlong" && password === "135799") {
+        localStorage.setItem("loggedIn", "true");
+        document.getElementById("menu-tailieu").style.display = "inline";
+        document.getElementById("logoutBtn").style.display = "inline";
+        document.getElementById("loginForm").style.display = "none";
+        document.getElementById("loginMessage").innerText = "Đăng nhập thành công!";
       } else {
-        document.getElementById("message").innerText = "Sai tài khoản hoặc mật khẩu!";
+        document.getElementById("loginMessage").innerText = "Sai tài khoản hoặc mật khẩu.";
       }
-    }
+    });
 
-    // Đăng xuất
-    function logout() {
-      localStorage.removeItem("isTeacher");
-      document.getElementById("menu-tlgd").classList.add("hidden");
-      document.getElementById("logoutBtn").classList.add("hidden");
-      alert("Đã đăng xuất.");
-    }
-
-    // Khi tải trang, kiểm tra trạng thái
-    window.onload = function() {
-      if (localStorage.getItem("isTeacher") === "true") {
-        document.getElementById("menu-tlgd").classList.remove("hidden");
-        document.getElementById("logoutBtn").classList.remove("hidden");
-      }
-    }
+    // xử lý logout
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.removeItem("loggedIn");
+      window.location.href = "index.html";
+    });
   </script>
 </body>
 </html>
