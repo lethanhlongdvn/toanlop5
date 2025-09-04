@@ -2,46 +2,78 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bài giảng trình chiếu</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9fafb;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #1976d2;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
       padding: 20px;
+      background: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border-radius: 8px;
     }
     .hidden {
       display: none;
     }
     select {
-      padding: 5px;
-      font-size: 16px;
+      padding: 8px;
+      font-size: 1em;
     }
-    .content {
-      margin-top: 20px;
+    button {
+      padding: 8px 12px;
+      background: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+    button:hover {
+      background: #0d47a1;
     }
   </style>
 </head>
 <body>
-  <h2>Bài giảng trình chiếu</h2>
+  <header>
+    <h1>Bài giảng trình chiếu</h1>
+  </header>
 
-  <!-- Thông báo khi chưa đăng nhập -->
-  <div id="noAccess" class="hidden">
-    <p style="color: red;">Bạn không có quyền truy cập. Vui lòng đăng nhập.</p>
+  <!-- Khi chưa đăng nhập -->
+  <div id="noAccess" class="container hidden">
+    <p><strong>Bạn không có quyền truy cập.</strong> Vui lòng quay lại trang chủ và đăng nhập.</p>
+    <a href="index.html"><button>🔑 Đăng nhập</button></a>
   </div>
 
-  <!-- Nội dung khi đăng nhập -->
-  <div id="mainContent" class="hidden">
-    <label for="weekSelect">Chọn tuần:</label>
+  <!-- Nội dung chính -->
+  <div id="mainContent" class="container hidden">
+    <h2>Chọn tuần để xem bài giảng</h2>
     <select id="weekSelect">
-      <option value="">-- Chọn tuần --</option>
+      <option value="">-- Chọn Tuần --</option>
+      <!-- Tuần 1 đến 35 -->
+      <script>
+        for (let i = 1; i <= 35; i++) {
+          document.write(`<option value="tuan${i}.html">Tuần ${i}</option>`);
+        }
+      </script>
     </select>
-
-    <div class="content" id="contentArea">
-      <p>Vui lòng chọn tuần để mở bài giảng.</p>
-    </div>
+    <button onclick="goWeek()">Đi</button>
   </div>
 
   <script>
-    // Kiểm tra trạng thái đăng nhập
+    // kiểm tra trạng thái đăng nhập
     const loggedIn = localStorage.getItem("isLoggedIn");
 
     const noAccess = document.getElementById("noAccess");
@@ -53,22 +85,16 @@
       noAccess.classList.remove("hidden");
     }
 
-    // Tạo danh sách tuần 1 → 35
-    const weekSelect = document.getElementById("weekSelect");
-    for (let i = 1; i <= 35; i++) {
-      let option = document.createElement("option");
-      option.value = "tuan" + i + ".html"; // Link trang con tuần
-      option.textContent = "Tuần " + i;
-      weekSelect.appendChild(option);
-    }
-
-    // Khi chọn tuần → mở link tương ứng
-    weekSelect.addEventListener("change", function() {
-      const selectedPage = this.value;
-      if (selectedPage) {
-        window.location.href = selectedPage;
+    // chuyển đến trang tuần
+    function goWeek() {
+      const select = document.getElementById("weekSelect");
+      const link = select.value;
+      if (link) {
+        window.location.href = link;
+      } else {
+        alert("Vui lòng chọn một tuần!");
       }
-    });
+    }
   </script>
 </body>
 </html>
