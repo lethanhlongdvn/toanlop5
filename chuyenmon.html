@@ -5,50 +5,109 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tài liệu chuyên môn</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
-    h1 { color: #1976d2; text-align: center; }
-    .doc-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 20px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f6f9;
     }
-    .doc-item {
+
+    header {
+      background-color: #1976d2;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    section {
       background: white;
-      border: 1px solid #ddd;
-      padding: 12px;
-      border-radius: 6px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      transition: all 0.2s;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    .doc-item:hover {
-      background: #e3f2fd;
+
+    section h2 {
+      margin-top: 0;
+      color: #1976d2;
     }
-    a { text-decoration: none; color: #1976d2; font-weight: bold; }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      margin: 10px 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: #1976d2;
+      font-weight: bold;
+    }
+
+    a:hover {
+      color: #0d47a1;
+    }
+
+    .hidden { display: none; }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background-color: #1976d2;
+      color: white;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
-  <h1>📚 Tài liệu chuyên môn</h1>
-  <p style="text-align:center">Danh sách các tài liệu (thầy chèn link vào):</p>
+  <header>
+    <h1>Tài liệu chuyên môn</h1>
+  </header>
 
-  <div class="doc-list">
-    <div class="doc-item"><a href="#">Phương pháp giảng dạy Toán</a></div>
-    <div class="doc-item"><a href="#">Đổi mới phương pháp Tiếng Việt</a></div>
-    <div class="doc-item"><a href="#">Ứng dụng CNTT trong giảng dạy</a></div>
-    <div class="doc-item"><a href="#">Phát triển năng lực học sinh</a></div>
-    <div class="doc-item"><a href="#">Đổi mới kiểm tra đánh giá</a></div>
+  <!-- Khi chưa đăng nhập -->
+  <div id="noAccess" class="container hidden" style="padding:20px; text-align:center;">
+    <p><strong>Bạn không có quyền truy cập.</strong> Vui lòng quay lại trang chủ và đăng nhập.</p>
+    <a href="index.html"><button>🔑 Đăng nhập</button></a>
   </div>
 
-  <p style="text-align:center;margin-top:20px;">
-    <a href="index.html">⬅ Quay lại trang chính</a>
-  </p>
+  <!-- Nội dung chính -->
+  <main id="mainContent" class="hidden">
+    <section>
+      <h2>Danh sách tài liệu</h2>
+      <p>Dưới đây là các liên kết đến tài liệu chuyên môn (Google Drive, hoặc nguồn khác):</p>
+      <ul>
+        <li><a href="https://drive.google.com/drive/folders/xxxxxxx" target="_blank">📂 Tài liệu 1</a></li>
+        <li><a href="https://drive.google.com/drive/folders/yyyyyyy" target="_blank">📂 Tài liệu 2</a></li>
+        <li><a href="https://drive.google.com/file/d/zzzzzzz/view" target="_blank">📄 Tài liệu 3</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 - Trang dạy học Toán lớp 5
+  </footer>
 
   <script>
-    if (localStorage.getItem("isTeacher") !== "true") {
-      document.body.innerHTML = "<h2 style='color:red;text-align:center;'>Bạn không có quyền truy cập. Vui lòng <a href='index.html'>đăng nhập</a>.</h2>";
+    // kiểm tra trạng thái đăng nhập
+    const role = localStorage.getItem("role");
+
+    if (role === "teacher") {
+      document.getElementById("mainContent").classList.remove("hidden");
+    } else {
+      document.getElementById("noAccess").classList.remove("hidden");
     }
   </script>
 </body>
