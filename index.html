@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -13,105 +12,70 @@
       color: #333;
     }
     header {
-       background-image: url("banner1.png"); /* thay bằng đường dẫn ảnh */
-  background-size: cover;       /* ảnh phủ kín header */
-  background-position: center;  /* canh giữa */
-  background-repeat: no-repeat; /* không lặp lại */
-
-  /* Thêm overlay mờ nếu muốn chữ dễ đọc */
- 
-
-  color: white;
-  padding: 20px 15px;
-  text-align: center;
-  height: 200px;       /* 👈 chỉnh chiều cao theo ý muốn */
-  display: flex;       /* căn giữa chữ */
-  flex-direction: column;
-  justify-content: center;
-}
-    header h1 {
-      font-size: 2.0em; /* chữ chiếm 5% chiều ngang màn hình */
-  margin: 0;
-    }
-    header p {
-      font-size: 1.5em;
-  margin-top: 0px;
-    }
-    nav {
-      background-color: white;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    nav ul {
-      display: flex;
-      list-style: none;
-      margin: 0;
-      padding: 10px 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    nav li {
-      margin: 5px 10px;
-    }
-    nav a {
-      text-decoration: none;
-      color: #1976d2;
-      font-weight: bold;
-      padding: 10px 16px;
-      border-radius: 6px;
-      transition: background-color 0.2s ease;
-    }
-    nav a:hover {
-      background-color: #e3f2fd;
-    }
-    .intro {
-      max-width: 800px;
-      margin: 15px auto 15px;
-      padding: 0 10px;
-      font-size: 1.1em;
-      background-color: #ffffff;
-      border-left: 5px solid #1976d2;
-      padding: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-    .featured {
-      padding: 10px 10px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .featured h2 {
+      background-image: url("banner1.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
+      padding: 20px 15px;
       text-align: center;
-      color: #1976d2;
-    }
-    .course-list {
-      margin-top: 10px;
+      height: 200px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      justify-content: center;
     }
-    .course-item {
-      background-color: white;
-      border-radius: 8px;
-      padding: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    header h1 { font-size: 2.0em; margin: 0; }
+    header p { font-size: 1.2em; margin-top: 5px; }
+
+    nav { background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    nav ul {
+      display: flex; list-style: none;
+      margin: 0; padding: 10px 20px;
+      justify-content: center; flex-wrap: wrap;
     }
-    .course-item h3 {
-      margin: 0;
-      color: #1976d2;
+    nav li { margin: 5px 10px; }
+    nav a {
+      text-decoration: none; color: #1976d2;
+      font-weight: bold; padding: 10px 16px;
+      border-radius: 6px;
+    }
+    nav a:hover { background-color: #e3f2fd; }
+
+    .intro {
+      max-width: 800px; margin: 15px auto;
+      background: #fff; border-left: 5px solid #1976d2;
+      padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
     footer {
-      text-align: center;
-      padding: 10px;
-      background-color: #e3f2fd;
-      color: #333;
+      text-align: center; padding: 10px;
+      background-color: #e3f2fd; color: #333;
     }
+
+    /* Hộp đăng nhập */
+    .login-box {
+      position: fixed; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: white; padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      text-align: center; display: none;
+    }
+    .login-box input {
+      width: 90%; padding: 8px;
+      margin: 8px 0; border: 1px solid #ccc; border-radius: 5px;
+    }
+    .login-box button {
+      padding: 8px 15px; margin-top: 10px;
+      background: #1976d2; color: white; border: none;
+      border-radius: 5px; cursor: pointer;
+    }
+    .hidden { display: none; }
   </style>
 </head>
 <body>
   <header>
-    
-
-
-    
+    <h1>Toán lớp 5 – Kết nối tri thức</h1>
+    <p>Học vui – Hiểu sâu – Ứng dụng tốt</p>
   </header>
 
   <nav>
@@ -120,8 +84,9 @@
       <li><a href="baihoc.html">📘 Bài học</a></li>
       <li><a href="luyentap.html">✍️ Luyện tập</a></li>
       <li><a href="trochoi.html">🎮 Trò chơi</a></li>
-      <li><a href="tailieu.html">📥 Tài liệu</a></li>
-      <li><a href="lienhe.html">📩 Liên hệ</a></li>
+      <li><a href="tailieu.html" id="menu-tlgd" class="hidden">📥 Tài liệu giảng dạy</a></li>
+      <li><a href="#" onclick="openLogin()">🔑 Đăng nhập GV</a></li>
+      <li><a href="#" onclick="logout()" id="logoutBtn" class="hidden">🚪 Đăng xuất</a></li>
     </ul>
   </nav>
 
@@ -129,16 +94,63 @@
     <p><strong>Chào mừng bạn đến với trang Toán lớp 5 – Kết nối tri thức!</strong><br>
     Đây là nơi học sinh có thể <strong>học Toán một cách vui vẻ, chủ động và hiệu quả</strong> thông qua:</p>
     <ul>
-      <li>✅ <strong>Bài học sinh động</strong> sát chương trình SGK</li>
-      <li>✅ <strong>Luyện tập có chấm điểm tự động</strong></li>
-      <li>✅ <strong>Trò chơi Toán học hấp dẫn</strong></li>
-      <li>✅ <strong>Tài liệu hỗ trợ học tập đầy đủ</strong></li>
+      <li>✅ Bài học sinh động sát chương trình SGK</li>
+      <li>✅ Luyện tập có chấm điểm tự động</li>
+      <li>✅ Trò chơi Toán học hấp dẫn</li>
+      <li>✅ Tài liệu hỗ trợ học tập đầy đủ</li>
     </ul>
-    <p>Với sự hướng dẫn của giáo viên, cùng tinh thần tự học của các em, site này sẽ là <strong>người bạn đồng hành tin cậy</strong> trên hành trình chinh phục <strong>Toán lớp 5</strong>.</p>
   </section>
-  <section class="featured">
+
   <footer>
     © 2025 Thầy Long – Toán lớp 5 – Kết nối tri thức
   </footer>
+
+  <!-- Hộp đăng nhập -->
+  <div id="loginBox" class="login-box">
+    <h3>Đăng nhập giáo viên</h3>
+    <input type="text" id="username" placeholder="Tên đăng nhập"><br>
+    <input type="password" id="password" placeholder="Mật khẩu"><br>
+    <button onclick="login()">Đăng nhập</button>
+    <button onclick="closeLogin()">Đóng</button>
+    <p id="message" style="color:red;"></p>
+  </div>
+
+  <script>
+    // Mở/đóng form
+    function openLogin() { document.getElementById("loginBox").style.display = "block"; }
+    function closeLogin() { document.getElementById("loginBox").style.display = "none"; }
+
+    // Đăng nhập
+    function login() {
+      let user = document.getElementById("username").value;
+      let pass = document.getElementById("password").value;
+
+      if (user === "giaovien" && pass === "matkhau123") {
+        localStorage.setItem("isTeacher", "true");
+        document.getElementById("menu-tlgd").classList.remove("hidden");
+        document.getElementById("logoutBtn").classList.remove("hidden");
+        closeLogin();
+        alert("Đăng nhập thành công!");
+      } else {
+        document.getElementById("message").innerText = "Sai tài khoản hoặc mật khẩu!";
+      }
+    }
+
+    // Đăng xuất
+    function logout() {
+      localStorage.removeItem("isTeacher");
+      document.getElementById("menu-tlgd").classList.add("hidden");
+      document.getElementById("logoutBtn").classList.add("hidden");
+      alert("Đã đăng xuất.");
+    }
+
+    // Khi tải trang, kiểm tra trạng thái
+    window.onload = function() {
+      if (localStorage.getItem("isTeacher") === "true") {
+        document.getElementById("menu-tlgd").classList.remove("hidden");
+        document.getElementById("logoutBtn").classList.remove("hidden");
+      }
+    }
+  </script>
 </body>
 </html>
