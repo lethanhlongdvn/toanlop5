@@ -58,27 +58,30 @@
     <h2>Chọn tuần để xem bài giảng</h2>
     <select id="weekSelect">
       <option value="">-- Chọn Tuần --</option>
-      <script>
-        for (let i = 1; i <= 35; i++) {
-          document.write(`<option value="toantuan${i}.html">Tuần ${i}</option>`);
-        }
-      </script>
     </select>
     <button onclick="goWeek()">Đi</button>
   </div>
 
   <script>
-    // kiểm tra trạng thái đăng nhập giống index.html
+    // kiểm tra trạng thái đăng nhập
     const role = localStorage.getItem("role");
-
     if (role === "teacher") {
       document.getElementById("mainContent").classList.remove("hidden");
     } else {
       document.getElementById("noAccess").classList.remove("hidden");
     }
 
+    // thêm option cho tuần 1 -> 35
+    const select = document.getElementById("weekSelect");
+    for (let i = 1; i <= 35; i++) {
+      let opt = document.createElement("option");
+      opt.value = `toantuan${i}.html`;
+      opt.textContent = `Tuần ${i}`;
+      select.appendChild(opt);
+    }
+
+    // chuyển trang
     function goWeek() {
-      const select = document.getElementById("weekSelect");
       const link = select.value;
       if (link) {
         window.location.href = link;
