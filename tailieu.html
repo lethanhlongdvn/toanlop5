@@ -31,7 +31,6 @@
     }
     nav li {
       margin: 5px 10px;
-      position: relative; /* để làm dropdown */
     }
     nav a {
       text-decoration: none;
@@ -45,29 +44,6 @@
     nav a:hover {
       background-color: #e3f2fd;
     }
-    /* Dropdown menu */
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      top: 40px;
-      left: 0;
-      background-color: white;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      min-width: 200px;
-      border-radius: 6px;
-      z-index: 1000;
-    }
-    .dropdown-content a {
-      padding: 10px 16px;
-      color: #1976d2;
-      font-weight: normal;
-    }
-    .dropdown-content a:hover {
-      background-color: #e3f2fd;
-    }
-    nav li:hover .dropdown-content {
-      display: block;
-    }
 
     .intro {
       max-width: 800px;
@@ -76,6 +52,33 @@
       background: white;
       border-left: 5px solid #1976d2;
       box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .resources {
+      max-width: 800px;
+      margin: 20px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .resources h2 {
+      color: #1976d2;
+      margin-top: 0;
+    }
+    .resources ul {
+      list-style: none;
+      padding: 0;
+    }
+    .resources li {
+      margin: 8px 0;
+      padding: 10px;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      transition: background-color 0.2s ease;
+    }
+    .resources li:hover {
+      background-color: #f9f9f9;
     }
 
     footer {
@@ -99,21 +102,22 @@
       <li><a href="baihoc.html">📘 Bài học</a></li>
       <li><a href="luyentap.html">✍️ Luyện tập</a></li>
       <li><a href="trochoi.html">🎮 Trò chơi</a></li>
-      <li>
-        <a href="#">📥 Tài liệu giảng dạy ▼</a>
-        <div class="dropdown-content teacher-only">
-          <a href="#">📄 Giáo án Word</a>
-          <a href="#">📊 Bài giảng trình chiếu</a>
-          <a href="#">📚 Tài liệu chuyên môn</a>
-        </div>
-      </li>
+      <li><a href="tailieu.html">📥 Tài liệu giảng dạy</a></li>
       <li><a href="lienhe.html">📩 Liên hệ</a></li>
     </ul>
   </nav>
 
   <section class="intro">
-    <p><strong>Chú ý:</strong> Phần tài liệu giảng dạy chỉ hiện khi đăng nhập tài khoản <strong>Giáo viên</strong>.  
-    Nếu bạn là <em>học sinh</em>, bạn sẽ không thấy menu này.</p>
+    <p><strong>Lưu ý:</strong> Phần tài liệu bên dưới chỉ hiển thị khi đăng nhập bằng tài khoản <strong>Giáo viên</strong>.</p>
+  </section>
+
+  <section class="resources teacher-only" style="display:none;">
+    <h2>📥 Tài nguyên giảng dạy</h2>
+    <ul>
+      <li>📄 <a href="#">Giáo án Word</a></li>
+      <li>📊 <a href="#">Bài giảng trình chiếu (PowerPoint)</a></li>
+      <li>📚 <a href="#">Tài liệu chuyên môn</a></li>
+    </ul>
   </section>
 
   <footer>
@@ -121,12 +125,12 @@
   </footer>
 
   <script>
-    // Kiểm tra role lưu trong localStorage
+    // Kiểm tra vai trò
     const isTeacher = localStorage.getItem("role") === "teacher";
-    const teacherSections = document.querySelectorAll(".teacher-only");
-    teacherSections.forEach(section => {
-      section.style.display = isTeacher ? "block" : "none";
-    });
+    const teacherResources = document.querySelector(".teacher-only");
+    if (isTeacher) {
+      teacherResources.style.display = "block";
+    }
   </script>
 </body>
 </html>
