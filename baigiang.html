@@ -1,56 +1,90 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bài giảng trình chiếu</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; text-align: center; }
-    h1 { color: #388e3c; }
-    select {
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      margin-top: 15px;
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 20px;
     }
-    .note {
-      margin-top: 20px;
-      font-size: 14px;
-      color: #555;
+    h1 {
+      text-align: center;
+      color: #1976d2;
+    }
+    .menu {
+      max-width: 400px;
+      margin: 20px auto;
+      text-align: center;
+    }
+    select {
+      padding: 8px;
+      font-size: 1em;
+      border-radius: 6px;
+      border: 1px solid #1976d2;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 8px 14px;
+      background: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #125699;
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 10px;
+      background: #e3f2fd;
     }
   </style>
 </head>
 <body>
-  <h1>🎥 Bài giảng trình chiếu</h1>
-  <p>Chọn tuần để mở bài giảng:</p>
+<script>
+  // Kiểm tra quyền truy cập
+  if (localStorage.getItem("role") !== "teacher") {
+    document.body.innerHTML = "<h2 style='color:red;text-align:center;'>Bạn không có quyền truy cập.<br> Vui lòng <a href='index.html'>đăng nhập</a>.</h2>";
+  }
+</script>
 
-  <select id="weekSelect">
-    <option value="">-- Chọn Tuần --</option>
-  </select>
+  <h1>📊 Bài giảng trình chiếu</h1>
 
-  <p class="note">Mỗi tuần sẽ liên kết đến trang riêng (ví dụ: <em>baigiang-tuan1.html</em>, <em>baigiang-tuan2.html</em>, …).</p>
-
-  <script>
-    // Kiểm tra đăng nhập
-    if (localStorage.getItem("isTeacher") !== "true") {
-      document.body.innerHTML = "<h2 style='color:red;text-align:center;'>Bạn không có quyền truy cập. Vui lòng <a href='index.html'>đăng nhập</a>.</h2>";
-    } else {
-      // Tạo danh sách tuần từ 1 đến 35
-      const select = document.getElementById("weekSelect");
-      for (let i = 1; i <= 35; i++) {
-        const opt = document.createElement("option");
-        opt.value = `baigiang-tuan${i}.html`;
-        opt.textContent = `Tuần ${i}`;
-        select.appendChild(opt);
-      }
-
-      // Chuyển hướng khi chọn tuần
-      select.addEventListener("change", function() {
-        if (this.value) {
-          window.location.href = this.value;
+  <div class="menu">
+    <label for="weekSelect"><strong>Chọn tuần:</strong></label><br><br>
+    <select id="weekSelect">
+      <option value="">-- Chọn tuần --</option>
+      <!-- Tạo 35 tuần -->
+      <script>
+        for (let i = 1; i <= 35; i++) {
+          document.write(`<option value="week${i}.html">Tuần ${i}</option>`);
         }
-      });
+      </script>
+    </select>
+    <br>
+    <button class="btn" onclick="goWeek()">Mở bài giảng</button>
+  </div>
+
+  <footer>
+    © 2025 Thầy Long – Bài giảng trình chiếu Toán lớp 5
+  </footer>
+
+<script>
+  function goWeek() {
+    const url = document.getElementById("weekSelect").value;
+    if (url) {
+      window.location.href = url; // thầy tạo sẵn file week1.html, week2.html... và chèn link PowerPoint/Google Slide
+    } else {
+      alert("Vui lòng chọn tuần trước!");
     }
-  </script>
+  }
+</script>
 </body>
 </html>
