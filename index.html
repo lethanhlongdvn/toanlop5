@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -13,29 +12,17 @@
       color: #333;
     }
     header {
-       background-image: url("banner1.png"); /* thay bằng đường dẫn ảnh */
-  background-size: cover;       /* ảnh phủ kín header */
-  background-position: center;  /* canh giữa */
-  background-repeat: no-repeat; /* không lặp lại */
-
-  /* Thêm overlay mờ nếu muốn chữ dễ đọc */
- 
-
-  color: white;
-  padding: 20px 15px;
-  text-align: center;
-  height: 200px;       /* 👈 chỉnh chiều cao theo ý muốn */
-  display: flex;       /* căn giữa chữ */
-  flex-direction: column;
-  justify-content: center;
-}
-    header h1 {
-      font-size: 2.0em; /* chữ chiếm 5% chiều ngang màn hình */
-  margin: 0;
-    }
-    header p {
-      font-size: 1.5em;
-  margin-top: 0px;
+      background-image: url("banner1.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
+      padding: 20px 15px;
+      text-align: center;
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     nav {
       background-color: white;
@@ -50,6 +37,7 @@
       flex-wrap: wrap;
     }
     nav li {
+      position: relative;
       margin: 5px 10px;
     }
     nav a {
@@ -63,40 +51,28 @@
     nav a:hover {
       background-color: #e3f2fd;
     }
+    /* menu con */
+    nav ul ul {
+      display: none;
+      position: absolute;
+      top: 40px;
+      left: 0;
+      background: white;
+      padding: 10px;
+      list-style: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    nav ul li:hover > ul {
+      display: block;
+    }
     .intro {
       max-width: 800px;
       margin: 15px auto 15px;
-      padding: 0 10px;
       font-size: 1.1em;
       background-color: #ffffff;
       border-left: 5px solid #1976d2;
       padding: 10px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-    .featured {
-      padding: 10px 10px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .featured h2 {
-      text-align: center;
-      color: #1976d2;
-    }
-    .course-list {
-      margin-top: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .course-item {
-      background-color: white;
-      border-radius: 8px;
-      padding: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    .course-item h3 {
-      margin: 0;
-      color: #1976d2;
     }
     footer {
       text-align: center;
@@ -104,15 +80,27 @@
       background-color: #e3f2fd;
       color: #333;
     }
+    #loginForm {
+      display: none;
+      text-align: center;
+      margin: 15px;
+    }
+    #loginForm input {
+      margin: 5px;
+      padding: 5px;
+    }
+    #loginForm button {
+      padding: 6px 12px;
+      background: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <header>
-    
-
-
-    
-  </header>
+  <header></header>
 
   <nav>
     <ul>
@@ -120,10 +108,28 @@
       <li><a href="baihoc.html">📘 Bài học</a></li>
       <li><a href="luyentap.html">✍️ Luyện tập</a></li>
       <li><a href="trochoi.html">🎮 Trò chơi</a></li>
-      <li><a href="tailieu.html">📥 Tài liệu</a></li>
+      <li id="menu-tailieu" style="display:none;">
+        <a href="#">📥 Tài liệu</a>
+        <ul>
+          <li><a href="giaovan.html">📄 GIÁO ÁN WORD</a></li>
+          <li><a href="baigiang.html">📊 BÀI GIẢNG TRÌNH CHIẾU</a></li>
+          <li><a href="chuyenmon.html">📚 TÀI LIỆU CHUYÊN MÔN</a></li>
+        </ul>
+      </li>
       <li><a href="lienhe.html">📩 Liên hệ</a></li>
+      <li><a href="#" id="loginBtn">🔑 Đăng nhập</a></li>
+      <li><a href="#" id="logoutBtn" style="display:none;">🚪 Đăng xuất</a></li>
     </ul>
   </nav>
+
+  <!-- Form đăng nhập -->
+  <div id="loginForm">
+    <h3>Đăng nhập giáo viên</h3>
+    <input type="text" id="username" placeholder="Tên đăng nhập"><br>
+    <input type="password" id="password" placeholder="Mật khẩu"><br>
+    <button onclick="login()">Đăng nhập</button>
+    <p id="loginMessage" style="color:red;"></p>
+  </div>
 
   <section class="intro">
     <p><strong>Chào mừng bạn đến với trang Toán lớp 5 – Kết nối tri thức!</strong><br>
@@ -134,11 +140,45 @@
       <li>✅ <strong>Trò chơi Toán học hấp dẫn</strong></li>
       <li>✅ <strong>Tài liệu hỗ trợ học tập đầy đủ</strong></li>
     </ul>
-    <p>Với sự hướng dẫn của giáo viên, cùng tinh thần tự học của các em, site này sẽ là <strong>người bạn đồng hành tin cậy</strong> trên hành trình chinh phục <strong>Toán lớp 5</strong>.</p>
   </section>
-  <section class="featured">
+
   <footer>
     © 2025 Thầy Long – Toán lớp 5 – Kết nối tri thức
   </footer>
+
+  <script>
+    // kiểm tra trạng thái đăng nhập khi tải trang
+    document.addEventListener("DOMContentLoaded", () => {
+      if (localStorage.getItem("role") === "teacher") {
+        document.getElementById("menu-tailieu").style.display = "block";
+        document.getElementById("logoutBtn").style.display = "block";
+        document.getElementById("loginBtn").style.display = "none";
+      }
+    });
+
+    // mở form đăng nhập
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      document.getElementById("loginForm").style.display = "block";
+    });
+
+    // đăng nhập
+    function login() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+
+      if (user === "lethanhlongdvn" && pass === "135799") {
+        localStorage.setItem("role", "teacher");
+        location.reload();
+      } else {
+        document.getElementById("loginMessage").textContent = "Sai tên đăng nhập hoặc mật khẩu!";
+      }
+    }
+
+    // đăng xuất
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.removeItem("role");
+      location.reload();
+    });
+  </script>
 </body>
 </html>
