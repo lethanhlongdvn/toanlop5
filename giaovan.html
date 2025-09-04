@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giáo án Word</title>
+</head>
+<body>
+  <h1>📄 Giáo án Word</h1>
+  <div id="content"></div>
+
+  <script>
+    if (localStorage.getItem("role") === "teacher") {
+      document.getElementById("content").innerHTML = `
+        <ul>
+          <li><a href="giaovan_toan_tuan1.docx">Giáo án Toán – Tuần 1</a></li>
+          <li><a href="giaovan_toan_tuan2.docx">Giáo án Toán – Tuần 2</a></li>
+        </ul>
+      `;
+    } else {
+      document.getElementById("content").innerHTML = "<p style='color:red;'>Bạn không có quyền truy cập. Vui lòng đăng nhập.</p>";
+    }
+  </script>
+</body>
+</html>
