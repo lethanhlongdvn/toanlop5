@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài giảng – Tuần 1</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9fafb;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #1976d2;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      text-align: center;
+    }
+    .hidden { display: none; }
+    h2 {
+      margin-bottom: 20px;
+      color: #1976d2;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      max-width: 300px;
+      margin: 10px auto;
+      padding: 12px;
+      font-size: 1.1em;
+      text-decoration: none;
+      background: #1976d2;
+      color: white;
+      border-radius: 6px;
+      transition: background 0.2s ease;
+    }
+    .btn:hover { background: #0d47a1; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bài giảng – Tuần 1</h1>
+  </header>
+
+  <!-- Khi chưa đăng nhập -->
+  <div id="noAccess" class="container hidden">
+    <p><strong>Bạn không có quyền truy cập.</strong> Vui lòng quay lại trang chủ và đăng nhập.</p>
+    <a href="index.html" class="btn">🔑 Về trang chủ</a>
+  </div>
+
+  <!-- Nội dung chính -->
+  <div id="mainContent" class="container hidden">
+    <h2>Chọn bài giảng</h2>
+    <a href="tiet1.html" class="btn">📘 Bài 1 – Tiết 1</a>
+    <a href="tiet2.html" class="btn">📘 Bài 2 – Tiết 2</a>
+    <a href="tiet3.html" class="btn">📘 Bài 3 – Tiết 3</a>
+    <a href="tiet4.html" class="btn">📘 Bài 4 – Tiết 4</a>
+    <a href="tiet5.html" class="btn">📘 Bài 5 – Tiết 5</a>
+  </div>
+
+  <script>
+    // kiểm tra đăng nhập giống index.html
+    const role = localStorage.getItem("role");
+
+    if (role === "teacher") {
+      document.getElementById("mainContent").classList.remove("hidden");
+    } else {
+      document.getElementById("noAccess").classList.remove("hidden");
+    }
+  </script>
+</body>
+</html>
