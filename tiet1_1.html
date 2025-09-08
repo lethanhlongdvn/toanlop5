@@ -77,6 +77,35 @@
   </style>
 </head>
 <body>
+<!-- Nút đăng nhập giáo viên (góc trên bên phải) -->
+<div id="loginBtnWrapper" style="position: fixed; top: 10px; right: 10px; z-index: 999;">
+  <button onclick="loginTeacher()" 
+          style="padding:6px 12px; background:#1976d2; color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:14px;">
+    🔑 Đăng nhập
+  </button>
+</div>
+
+<!-- Mục Bài giảng (ẩn mặc định) -->
+<section id="baigiang" style="display:none; margin-top:60px;">
+  <h2>📑 Bài giảng</h2>
+  <p>Thầy/cô có thể chèn slide hoặc tài liệu Google Drive ở đây:</p>
+  <iframe src="https://drive.google.com/file/d/....../preview" 
+          width="100%" height="500" style="border:none;"></iframe>
+</section>
+
+<script>
+function loginTeacher() {
+  const user = prompt("Nhập tên đăng nhập:");
+  const pass = prompt("Nhập mật khẩu:");
+
+  if(user === "lethanhlongdvn" && pass === "Long@dvn") {
+    document.getElementById("baigiang").style.display = "block";
+    alert("Chào thầy Long! Đã mở mục Bài giảng.");
+  } else {
+    alert("Sai tên đăng nhập hoặc mật khẩu!");
+  }
+}
+</script>
 
 <header>
   <h1>Tiết 1: Ôn tập số tự nhiên</h1>
@@ -100,33 +129,7 @@
     <li>Thông qua các bài toán thực tế, các em được phát triển năng lực giải quyết vấn đề.</li>
    </ul>
 </section>
-  <!-- 🔑 KHU VỰC BÀI GIẢNG (ẩn mặc định) -->
-<section id="baigiang" style="display:none;">
-  <h2>📑 Bài giảng</h2>
-  <p>Thầy/cô có thể chèn slide hoặc tài liệu Google Drive ở đây:</p>
-  <iframe src="https://drive.google.com/file/d/XXXXXX/preview"
-          width="100%" height="500" style="border:none;"></iframe>
-</section>
-
-<!-- 🔑 Nút đăng nhập -->
-<div style="text-align:center; margin:20px;">
-  <button onclick="loginTeacher()">🔑 Đăng nhập giáo viên</button>
-</div>
-
-<script>
-function loginTeacher() {
-  const user = prompt("Nhập tên đăng nhập:");
-  const pass = prompt("Nhập mật khẩu:");
-
-  if(user === "lethanhlongdvn" && pass === "Long@dvn") {
-    document.getElementById("baigiang").style.display = "block";
-    alert("Xin chào Thầy (Cô)! Đã mở mục Bài giảng.");
-  } else {
-    alert("Sai tài khoản hoặc mật khẩu! Bạn chỉ xem được phần cho học sinh.");
-  }
-}
-</script>
-
+ 
 <section class="practice">
   <h2>✍️ Luyện tập</h2>
   <p>Thử làm bài trắc nghiệm để rèn kỹ năng đọc‑viết, so sánh số.</p>
