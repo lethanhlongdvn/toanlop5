@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tiết 11 – BÀI 6: CỘNG TRỪ HAI PHÂN SỐ KHÁC MẪU SỐ (TIẾT 1)</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background: #1976d2;
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.4em;
+    }
+    header p {
+      margin-top: 10px;
+      font-size: 1.2em;
+    }
+    section {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    section h2 {
+      border-bottom: 2px solid #1976d2;
+      padding-bottom: 6px;
+      color: #1976d2;
+    }
+    .practice iframe {
+      width: 100%;
+      border: none;
+      height: 600px;
+    }
+    .game-link, .download-link {
+      display: inline-block;
+      margin: 15px 0;
+      padding: 10px 16px;
+      background: #1976d2;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #e3f2fd;
+      color: #333;
+    }
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.6em;
+      }
+      header p {
+        font-size: 1em;
+      }
+      section {
+        padding: 0 12px;
+      }
+      .game-link, .download-link {
+        width: 100%;
+        text-align: center;
+      }
+      .practice iframe {
+        height: 700px;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Nút đăng nhập giáo viên (góc trên bên phải) -->
+<div id="loginBtnWrapper" style="position: fixed; top: 10px; right: 10px; z-index: 999;">
+  <button onclick="loginTeacher()" 
+          style="padding:6px 12px; background:#1976d2; color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:14px;">
+    Giáo viên đăng nhập
+  </button>
+</div>
+
+<header>
+  <h1>Tiết 11 – BÀI 6: CỘNG TRỪ HAI PHÂN SỐ KHÁC MẪU SỐ (TIẾT 1)</h1>
+  <p> Làm được các phép tính cộng, trừ hai phân số khác mẫu số và áp dụng vào đời sống.</p>
+</header>
+
+<section>
+  <h2>🧠 MỤC TIÊU</h2>
+  <p>Kiến thức, kĩ năng</p>
+  <ul>
+    <li>Củng cố phép cộng, trừ hai phân số cùng mẫu số hoặc có một mẫu số chia hết cho mẫu số còn lại.</li>
+    <li>Hiểu được cách tính cộng, trừ hai phân số khác mẫu số bằng cách quy đồng mẫu số (lấy mẫu số chung là tích của hai mẫu số).</li>
+   </ul>
+  <p>Phát triển năng lực</p>
+  <ul>
+    <li>Thông qua hoạt động khám phá, hình thành phép cộng, trừ hai phân số khác mẫu số.</li>
+    <li>Qua các bài toán thực tế, phát triển năng lực giải quyết vấn đề, năng lực giao tiếp toán học.</li>
+   </ul>
+</section>
+ <!-- Mục Bài giảng (ẩn mặc định) -->
+<section id="baigiang" style="display:none; margin-top:60px;">
+  <h2>📑 Bài giảng</h2>
+  <p>Thầy/cô có thể chèn slide hoặc tài liệu Google Drive ở đây:</p>
+  <iframe src="https://drive.google.com/file/d/....../preview" 
+          width="100%" height="500" style="border:none;"></iframe>
+</section>
+
+<script>
+function loginTeacher() {
+  const user = prompt("Nhập tên đăng nhập:");
+  const pass = prompt("Nhập mật khẩu:");
+
+  if(user === "lethanhlongdvn" && pass === "Long@dvn") {
+    document.getElementById("baigiang").style.display = "block";
+    alert("Chào thầy Long! Đã mở mục Bài giảng.");
+  } else {
+    alert("Sai tên đăng nhập hoặc mật khẩu!");
+  }
+}
+</script>
+<section class="practice">
+  <h2>✍️ Luyện tập</h2>
+  <p>Thử làm bài trắc nghiệm để rèn kỹ năng đọc‑viết, so sánh số.</p>
+  <iframe src="https://forms.gle/MH7RQiu9LPzyvDCUA">Loading…</iframe>
+</section>
+<section class="practice">
+  <h2>✍️ Vở bài tập</h2>
+  <p>Thử làm bài trắc nghiệm để rèn kỹ năng đọc‑viết, so sánh số.</p>
+  <iframe src="https://forms.gle/uALRQrw3VSweqVPA8">Loading…</iframe>
+</section>
+<section>
+  <h2>🎮 Trò chơi Toán học</h2>
+  <p>Đang cập nhật.</p>
+  <a href="game/chon-so-lon.html" class="game-link" target="_blank">Chơi ngay</a>
+</section>
+<section style="text-align: center; margin-top: 40px;">
+  <a href="baihoc.html" class="download-link">⬅️ Quay về Bài học</a>
+</section>
+<footer>
+  &copy; 2025 Thầy Long – Toán lớp 5 – Kết nối tri thức
+</footer>
+
+</body>
+</html>
