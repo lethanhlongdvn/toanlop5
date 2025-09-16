@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Đường đua phân số</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+        }
+        
+        .car-animation {
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .fireworks {
+            animation: fireworks 1s ease-out;
+        }
+        
+        @keyframes fireworks {
+            0% { transform: scale(0); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .pulse-correct {
+            animation: pulse-correct 0.6s ease-in-out;
+        }
+        
+        @keyframes pulse-correct {
+            0% { background-color: rgb(34, 197, 94); transform: scale(1); }
+            50% { background-color: rgb(22, 163, 74); transform: scale(1.05); }
+            100% { background-color: rgb(34, 197, 94); transform: scale(1); }
+        }
+        
+        .pulse-wrong {
+            animation: pulse-wrong 0.6s ease-in-out;
+        }
+        
+        @keyframes pulse-wrong {
+            0% { background-color: rgb(239, 68, 68); transform: scale(1); }
+            50% { background-color: rgb(220, 38, 38); transform: scale(1.05); }
+            100% { background-color: rgb(239, 68, 68); transform: scale(1); }
+        }
+        
+        .road-line {
+            background: repeating-linear-gradient(
+                90deg,
+                #fbbf24 0px,
+                #fbbf24 20px,
+                transparent 20px,
+                transparent 40px
+            );
+            height: 4px;
+            animation: road-move 2s linear infinite;
+        }
+        
+        @keyframes road-move {
+            0% { background-position: 0px 0px; }
+            100% { background-position: 40px 0px; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-sky-400 to-sky-200 min-h-screen">
+    <!-- Header -->
+    <div class="bg-white shadow-lg p-3">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-xl sm:text-3xl font-bold text-orange-500 text-center mb-3 sm:mb-0">🏁 Đường đua phân số</h1>
+            <div class="flex justify-center space-x-4 sm:space-x-6">
+                <div class="text-center">
+                    <div class="text-xs sm:text-sm text-gray-600">Điểm số</div>
+                    <div id="score" class="text-lg sm:text-2xl font-bold text-blue-600">0</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-xs sm:text-sm text-gray-600">Cấp độ</div>
+                    <div id="level" class="text-lg sm:text-2xl font-bold text-green-600">1</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-xs sm:text-sm text-gray-600">Thời gian</div>
+                    <div id="timer" class="text-lg sm:text-2xl font-bold text-red-500">45</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Area -->
+    <div class="max-w-6xl mx-auto p-3 sm:p-6">
+        <!-- Race Track -->
+        <div class="bg-gray-700 rounded-lg p-3 sm:p-6 mb-4 sm:mb-6 relative overflow-hidden">
+            <div class="road-line mb-4"></div>
+            
+            <!-- Finish Line -->
+            <div class="absolute right-4 top-0 bottom-0 w-8 bg-gradient-to-b from-white via-black to-white opacity-80 flex items-center justify-center">
+                <div class="text-white font-bold text-xs rotate-90">ĐÍCH</div>
+            </div>
+            
+            <!-- Car Track -->
+            <div class="relative h-16 sm:h-20 bg-gray-600 rounded-lg flex items-center px-2 sm:px-4">
+                <div id="car" class="car-animation text-2xl sm:text-4xl" style="transform: translateX(0px)">🏎️</div>
+                <div class="absolute right-4 sm:right-8 text-2xl sm:text-4xl">🏁</div>
+            </div>
+            
+            <div class="road-line mt-4"></div>
+            
+            <!-- Progress Bar -->
+            <div class="mt-4 bg-gray-800 rounded-full h-3">
+                <div id="progress" class="bg-gradient-to-r from-green-400 to-blue-500 h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <!-- Question Area -->
+        <div id="questionArea" class="hidden bg-white rounded-xl shadow-lg p-4 sm:p-8 mb-4 sm:mb-6">
+            <div class="text-center mb-4 sm:mb-6">
+                <div id="levelInfo" class="text-sm sm:text-lg font-semibold text-gray-600 mb-2">Cấp độ 1: Cộng trừ phân số cùng mẫu</div>
+                <div id="question" class="text-xl sm:text-3xl font-bold text-gray-800 mb-4">1/4 + 2/4 = ?</div>
+            </div>
+            
+            <!-- Answer Options -->
+            <div id="answers" class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 max-w-2xl mx-auto">
+                <button class="answer-btn bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-bold py-4 sm:py-4 px-4 sm:px-6 rounded-xl text-lg sm:text-xl transition-all duration-200 transform hover:scale-105 active:scale-95 touch-manipulation" data-answer="3/4">3/4</button>
+                <button class="answer-btn bg-green-500 hover:bg-green-600 active:bg-green-700 text-white font-bold py-4 sm:py-4 px-4 sm:px-6 rounded-xl text-lg sm:text-xl transition-all duration-200 transform hover:scale-105 active:scale-95 touch-manipulation" data-answer="1/2">1/2</button>
+                <button class="answer-btn bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-bold py-4 sm:py-4 px-4 sm:px-6 rounded-xl text-lg sm:text-xl transition-all duration-200 transform hover:scale-105 active:scale-95 touch-manipulation" data-answer="2/4">2/4</button>
+                <button class="answer-btn bg-purple-500 hover:bg-purple-600 active:bg-purple-700 text-white font-bold py-4 sm:py-4 px-4 sm:px-6 rounded-xl text-lg sm:text-xl transition-all duration-200 transform hover:scale-105 active:scale-95 touch-manipulation" data-answer="1/4">1/4</button>
+            </div>
+        </div>
+
+        <!-- Level Selection Screen -->
+        <div id="levelSelectionScreen" class="bg-white rounded-xl shadow-lg p-4 sm:p-8 text-center">
+            <div class="text-4xl sm:text-6xl mb-4">🎯</div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-blue-600 mb-6">Chọn cấp độ bắt đầu</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-6">
+                <button id="selectLevel1" class="level-select-btn bg-green-500 hover:bg-green-600 active:bg-green-700 text-white font-bold py-6 px-6 rounded-xl text-lg transition-all duration-200 transform hover:scale-105 active:scale-95 touch-manipulation">
+                    <div class="text-2xl mb-2">🟢</div>
+                    <div class="font-bold">Cấp độ 1</div>
+                    <div class="text-sm opacity-90">Cộng trừ cùng mẫu</div>
+                </button>
+                
+                <button id="selectLevel2" class="level-select-btn bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-bold py-6 px-6 rounded-xl text-lg transition-all duration-200 transform hover:scale-105 active:scale-95 touch-manipulation">
+                    <div class="text-2xl mb-2">🔵</div>
+                    <div class="font-bold">Cấp độ 2</div>
+                    <div class="text-sm opacity-90">Cộng trừ khác mẫu</div>
+                </button>
+                
+                <button id="selectLevel3" class="level-select-btn bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-bold py-6 px-6 rounded-xl text-lg transition-all duration-200 transform hover:scale-105 active:scale-95 touch-manipulation">
+                    <div class="text-2xl mb-2">🟠</div>
+                    <div class="font-bold">Cấp độ 3</div>
+                    <div class="text-sm opacity-90">Nhân và chia</div>
+                </button>
+                
+                <button id="selectLevel4" class="level-select-btn bg-red-500 hover:bg-red-600 active:bg-red-700 text-white font-bold py-6 px-6 rounded-xl text-lg transition-all duration-200 transform hover:scale-105 active:scale-95 touch-manipulation">
+                    <div class="text-2xl mb-2">🔴</div>
+                    <div class="font-bold">Cấp độ 4</div>
+                    <div class="text-sm opacity-90">Bài toán hỗn hợp</div>
+                </button>
+            </div>
+            
+            <div class="flex justify-center">
+                <button id="showLeaderboardFromMenu" class="bg-purple-500 hover:bg-purple-600 active:bg-purple-700 text-white font-bold py-3 px-6 rounded-xl text-base sm:text-lg transition-all duration-200 transform hover:scale-105 active:scale-95 touch-manipulation">
+                    🏆 Xem bảng xếp hạng
+                </button>
+            </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="gameOverScreen" class="hidden bg-white rounded-xl shadow-lg p-4 sm:p-8 text-center">
+            <div id="gameOverContent">
+                <div class="text-4xl sm:text-6xl mb-4">🏆</div>
+                <h2 class="text-2xl sm:text-3xl font-bold text-green-600 mb-4">Chúc mừng!</h2>
+                <div id="finalScore" class="text-lg sm:text-xl text-gray-700 mb-4">Điểm số cuối cùng: 0</div>
+                <div id="badge" class="hidden mb-4">
+                    <div class="inline-block bg-yellow-400 text-yellow-900 px-4 sm:px-6 py-2 sm:py-3 rounded-full font-bold text-base sm:text-lg">
+                        🏅 Thợ săn phân số
+                    </div>
+                </div>
+                
+                <!-- Name Input for High Score -->
+                <div id="nameInput" class="mb-6">
+                    <p class="text-gray-600 mb-3">Nhập tên để lưu vào bảng xếp hạng:</p>
+                    <input type="text" id="playerName" placeholder="Tên của bạn..." maxlength="20" class="border-2 border-gray-300 rounded-lg px-4 py-2 text-center text-lg mb-3 w-full max-w-xs">
+                    <br>
+                    <button id="saveScore" class="bg-green-500 hover:bg-green-600 active:bg-green-700 text-white font-bold py-2 px-6 rounded-lg text-base transition-all duration-200 transform hover:scale-105 active:scale-95 touch-manipulation mr-2">
+                        💾 Lưu điểm
+                    </button>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                    <button id="playAgain" class="bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-bold py-3 px-6 sm:px-8 rounded-xl text-base sm:text-lg transition-all duration-200 transform hover:scale-105 active:scale-95 touch-manipulation">
+                        🎮 Chơi lại
+                    </button>
+                    <button id="showLeaderboard" class="bg-purple-500 hover:bg-purple-600 active:bg-purple-700 text-white font-bold py-3 px-6 sm:px-8 rounded-xl text-base sm:text-lg transition-all duration-200 transform hover:scale-105 active:scale-95 touch-manipulation">
+                        🏆 Bảng xếp hạng
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leaderboard Screen -->
+        <div id="leaderboardScreen" class="hidden bg-white rounded-xl shadow-lg p-4 sm:p-8">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl sm:text-3xl font-bold text-purple-600 mb-2">🏆 Bảng xếp hạng</h2>
+                <p class="text-gray-600">Top 20 người chơi xuất sắc nhất</p>
+            </div>
+            
+            <div id="leaderboardList" class="max-h-96 overflow-y-auto">
+                <!-- Leaderboard content will be inserted here -->
+            </div>
+            
+            <div class="text-center mt-6">
+                <button id="backToGame" class="bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl text-base sm:text-lg transition-all duration-200 transform hover:scale-105 active:scale-95 touch-manipulation">
+                    ← Quay lại
+                </button>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded-r-lg">
+            <h3 class="font-bold text-yellow-800 mb-2">📚 Hướng dẫn chơi:</h3>
+            <ul class="text-yellow-700 text-sm space-y-1">
+                <li>• Trả lời đúng để xe tiến lên đích</li>
+                <li>• Mỗi câu đúng: +10 điểm, câu sai: -5 điểm</li>
+                <li>• Đạt 80 điểm để nhận huy hiệu "Thợ săn phân số"</li>
+                <li>• 4 cấp độ từ dễ đến khó</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Fireworks Effect -->
+    <div id="fireworks" class="fixed inset-0 pointer-events-none hidden">
+        <div class="absolute top-1/4 left-1/4 text-6xl fireworks">🎆</div>
+        <div class="absolute top-1/3 right-1/4 text-6xl fireworks" style="animation-delay: 0.2s;">🎇</div>
+        <div class="absolute bottom-1/3 left-1/3 text-6xl fireworks" style="animation-delay: 0.4s;">✨</div>
+        <div class="absolute bottom-1/4 right-1/3 text-6xl fireworks" style="animation-delay: 0.6s;">🎉</div>
+    </div>
+
+    <script>
+        class FractionRaceGame {
+            constructor() {
+                this.score = 0;
+                this.level = 1;
+                this.currentQuestion = 0;
+                this.totalQuestions = 10;
+                this.timeLeft = 45;
+                this.timer = null;
+                this.carPosition = 0;
+                this.maxCarPosition = window.innerWidth < 640 ? 250 : 500;
+                this.leaderboard = this.loadLeaderboard();
+                
+                this.questions = {
+                    1: [ // Cộng trừ cùng mẫu
+                        {q: "1/4 + 2/4 = ?", answers: ["3/4", "1/2", "2/4", "1/4"], correct: "3/4"},
+                        {q: "3/5 - 1/5 = ?", answers: ["2/5", "3/5", "1/5", "4/5"], correct: "2/5"},
+                        {q: "2/7 + 3/7 = ?", answers: ["5/7", "6/7", "2/7", "1/7"], correct: "5/7"},
+                        {q: "4/6 - 2/6 = ?", answers: ["3/6", "1/3", "4/6", "6/6"], correct: "1/3"},
+                        {q: "1/8 + 3/8 = ?", answers: ["5/8", "1/2", "3/8", "2/8"], correct: "1/8"}
+                    ],
+                    2: [ // Cộng trừ khác mẫu
+                        {q: "1/2 + 1/4 = ?", answers: ["3/4", "2/6", "1/3", "2/4"], correct: "3/4"},
+                        {q: "2/3 - 1/6 = ?", answers: ["1/2", "1/3", "2/6", "3/6"], correct: "1/2"},
+                        {q: "1/3 + 1/6 = ?", answers: ["1/2", "2/9", "1/6", "2/6"], correct: "1/2"},
+                        {q: "3/4 - 1/2 = ?", answers: ["1/4", "2/4", "1/2", "3/4"], correct: "1/4"},
+                        {q: "1/5 + 2/10 = ?", answers: ["2/5", "3/15", "1/2", "3/10"], correct: "2/5"}
+                    ],
+                    3: [ // Nhân chia
+                        {q: "1/2 × 2/3 = ?", answers: ["1/3", "2/6", "2/5", "3/4"], correct: "1/3"},
+                        {q: "3/4 ÷ 1/2 = ?", answers: ["3/2", "3/8", "1/2", "6/4"], correct: "3/2"},
+                        {q: "2/5 × 3/4 = ?", answers: ["7/20", "5/9", "2/3", "3/10"], correct: "3/10"},
+                        {q: "4/6 ÷ 2/3 = ?", answers: ["1", "8/18", "2/2", "4/9"], correct: "1"},
+                        {q: "1/3 × 6/7 = ?", answers: ["2/7", "7/10", "1/2", "6/7"], correct: "2/7"}
+                    ],
+                    4: [ // Hỗn hợp
+                        {q: "(1/2 + 1/4) × 2 = ?", answers: ["3/2", "1", "2/3", "3/4"], correct: "3/2"},
+                        {q: "2/3 ÷ 1/2 - 1/6 = ?", answers: ["7/6", "1", "5/6", "4/3"], correct: "7/6"},
+                        {q: "1/4 × 2 + 1/2 = ?", answers: ["1", "3/4", "1/2", "5/4"], correct: "1"},
+                        {q: "(3/4 - 1/4) ÷ 1/2 = ?", answers: ["1", "1/4", "2", "3/2"], correct: "1"},
+                        {q: "2/5 + 1/3 × 3/2 = ?", answers: ["9/10", "1", "7/10", "4/5"], correct: "9/10"}
+                    ]
+                };
+                
+                this.levelNames = {
+                    1: "Cấp độ 1: Cộng trừ phân số cùng mẫu",
+                    2: "Cấp độ 2: Cộng trừ phân số khác mẫu", 
+                    3: "Cấp độ 3: Nhân và chia phân số",
+                    4: "Cấp độ 4: Bài toán hỗn hợp"
+                };
+                
+                this.currentQuestionIndex = 0;
+                this.init();
+            }
+            
+            init() {
+                this.bindEvents();
+                this.showLevelSelection();
+            }
+            
+            bindEvents() {
+                document.querySelectorAll('.answer-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => this.checkAnswer(e.target.dataset.answer, e.target));
+                    // Thêm hỗ trợ cảm ứng
+                    btn.addEventListener('touchstart', (e) => {
+                        e.preventDefault();
+                        btn.style.transform = 'scale(0.95)';
+                    });
+                    btn.addEventListener('touchend', (e) => {
+                        e.preventDefault();
+                        btn.style.transform = '';
+                        this.checkAnswer(e.target.dataset.answer, e.target);
+                    });
+                });
+                
+                document.getElementById('playAgain').addEventListener('click', () => this.resetGame());
+                document.getElementById('playAgain').addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    this.resetGame();
+                });
+                
+                document.getElementById('saveScore').addEventListener('click', () => this.savePlayerScore());
+                document.getElementById('showLeaderboard').addEventListener('click', () => this.showLeaderboard());
+                document.getElementById('showLeaderboardFromMenu').addEventListener('click', () => this.showLeaderboardFromMenu());
+                document.getElementById('backToGame').addEventListener('click', () => this.hideLeaderboard());
+                
+                // Level selection events
+                document.getElementById('selectLevel1').addEventListener('click', () => this.startGameAtLevel(1));
+                document.getElementById('selectLevel2').addEventListener('click', () => this.startGameAtLevel(2));
+                document.getElementById('selectLevel3').addEventListener('click', () => this.startGameAtLevel(3));
+                document.getElementById('selectLevel4').addEventListener('click', () => this.startGameAtLevel(4));
+                
+                // Enter key để lưu điểm
+                document.getElementById('playerName').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.savePlayerScore();
+                    }
+                });
+                
+                // Ngăn zoom khi double tap
+                document.addEventListener('touchstart', function(e) {
+                    if (e.touches.length > 1) {
+                        e.preventDefault();
+                    }
+                });
+                
+                let lastTouchEnd = 0;
+                document.addEventListener('touchend', function(e) {
+                    const now = (new Date()).getTime();
+                    if (now - lastTouchEnd <= 300) {
+                        e.preventDefault();
+                    }
+                    lastTouchEnd = now;
+                }, false);
+            }
+            
+            generateQuestion() {
+                const levelQuestions = this.questions[this.level];
+                if (this.currentQuestionIndex >= levelQuestions.length) {
+                    this.nextLevel();
+                    return;
+                }
+                
+                const question = levelQuestions[this.currentQuestionIndex];
+                document.getElementById('question').textContent = question.q;
+                document.getElementById('levelInfo').textContent = this.levelNames[this.level];
+                
+                const answerBtns = document.querySelectorAll('.answer-btn');
+                const shuffledAnswers = [...question.answers].sort(() => Math.random() - 0.5);
+                
+                answerBtns.forEach((btn, index) => {
+                    btn.textContent = shuffledAnswers[index];
+                    btn.dataset.answer = shuffledAnswers[index];
+                    btn.className = btn.className.replace(/pulse-\w+/g, '');
+                    btn.disabled = false;
+                });
+                
+                this.correctAnswer = question.correct;
+                this.timeLeft = 45;
+                this.startTimer();
+            }
+            
+            checkAnswer(selectedAnswer, buttonElement) {
+                this.stopTimer();
+                
+                const allBtns = document.querySelectorAll('.answer-btn');
+                allBtns.forEach(btn => btn.disabled = true);
+                
+                if (selectedAnswer === this.correctAnswer) {
+                    this.score += 10;
+                    this.moveCarForward();
+                    buttonElement.classList.add('pulse-correct');
+                    this.playSound('correct');
+                    
+                    setTimeout(() => {
+                        this.showFireworks();
+                    }, 300);
+                } else {
+                    this.score = Math.max(0, this.score - 5);
+                    buttonElement.classList.add('pulse-wrong');
+                    document.getElementById('car').classList.add('shake');
+                    this.playSound('wrong');
+                    
+                    setTimeout(() => {
+                        document.getElementById('car').classList.remove('shake');
+                    }, 500);
+                }
+                
+                this.updateScore();
+                this.currentQuestionIndex++;
+                
+                setTimeout(() => {
+                    if (this.currentQuestion >= this.totalQuestions && this.level >= 4) {
+                        this.endGame();
+                    } else {
+                        this.generateQuestion();
+                    }
+                }, 1500);
+            }
+            
+            moveCarForward() {
+                this.carPosition += this.maxCarPosition / (this.totalQuestions * 4);
+                this.carPosition = Math.min(this.carPosition, this.maxCarPosition);
+                
+                document.getElementById('car').style.transform = `translateX(${this.carPosition}px)`;
+                
+                const progress = (this.carPosition / this.maxCarPosition) * 100;
+                document.getElementById('progress').style.width = `${progress}%`;
+            }
+            
+            nextLevel() {
+                if (this.level < 4) {
+                    this.level++;
+                    this.currentQuestionIndex = 0;
+                    document.getElementById('level').textContent = this.level;
+                    this.generateQuestion();
+                } else {
+                    this.endGame();
+                }
+            }
+            
+            startTimer() {
+                this.stopTimer();
+                this.timer = setInterval(() => {
+                    this.timeLeft--;
+                    document.getElementById('timer').textContent = this.timeLeft;
+                    
+                    if (this.timeLeft <= 0) {
+                        this.timeUp();
+                    }
+                }, 1000);
+            }
+            
+            stopTimer() {
+                if (this.timer) {
+                    clearInterval(this.timer);
+                    this.timer = null;
+                }
+            }
+            
+            timeUp() {
+                this.stopTimer();
+                this.score = Math.max(0, this.score - 5);
+                this.updateScore();
+                
+                document.getElementById('car').classList.add('shake');
+                this.playSound('wrong');
+                
+                setTimeout(() => {
+                    document.getElementById('car').classList.remove('shake');
+                    this.currentQuestionIndex++;
+                    
+                    if (this.currentQuestion >= this.totalQuestions && this.level >= 4) {
+                        this.endGame();
+                    } else {
+                        this.generateQuestion();
+                    }
+                }, 1000);
+            }
+            
+            updateScore() {
+                document.getElementById('score').textContent = this.score;
+            }
+            
+            showFireworks() {
+                const fireworks = document.getElementById('fireworks');
+                fireworks.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    fireworks.classList.add('hidden');
+                }, 1000);
+            }
+            
+            playSound(type) {
+                // Tạo âm thanh đơn giản bằng Web Audio API
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                if (type === 'correct') {
+                    oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
+                    oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1); // E5
+                    oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.2); // G5
+                } else {
+                    oscillator.frequency.setValueAtTime(220, audioContext.currentTime); // A3
+                    oscillator.frequency.setValueAtTime(196, audioContext.currentTime + 0.1); // G3
+                }
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.3);
+            }
+            
+            endGame() {
+                document.getElementById('questionArea').classList.add('hidden');
+                document.getElementById('gameOverScreen').classList.remove('hidden');
+                document.getElementById('finalScore').textContent = `Điểm số cuối cùng: ${this.score}`;
+                
+                if (this.score >= 80) {
+                    document.getElementById('badge').classList.remove('hidden');
+                    this.showFireworks();
+                }
+            }
+            
+            showLevelSelection() {
+                document.getElementById('levelSelectionScreen').classList.remove('hidden');
+                document.getElementById('questionArea').classList.add('hidden');
+                document.getElementById('gameOverScreen').classList.add('hidden');
+                document.getElementById('leaderboardScreen').classList.add('hidden');
+            }
+            
+            startGameAtLevel(selectedLevel) {
+                this.level = selectedLevel;
+                this.score = 0;
+                this.currentQuestion = 0;
+                this.currentQuestionIndex = 0;
+                this.carPosition = 0;
+                
+                document.getElementById('score').textContent = '0';
+                document.getElementById('level').textContent = selectedLevel;
+                document.getElementById('car').style.transform = 'translateX(0px)';
+                document.getElementById('progress').style.width = '0%';
+                
+                document.getElementById('levelSelectionScreen').classList.add('hidden');
+                document.getElementById('questionArea').classList.remove('hidden');
+                document.getElementById('gameOverScreen').classList.add('hidden');
+                document.getElementById('leaderboardScreen').classList.add('hidden');
+                
+                this.generateQuestion();
+                this.startTimer();
+            }
+            
+            showLeaderboardFromMenu() {
+                document.getElementById('levelSelectionScreen').classList.add('hidden');
+                document.getElementById('leaderboardScreen').classList.remove('hidden');
+                this.renderLeaderboard();
+            }
+            
+            resetGame() {
+                this.showLevelSelection();
+                document.getElementById('badge').classList.add('hidden');
+                document.getElementById('playerName').value = '';
+            }
+            
+            loadLeaderboard() {
+                const saved = localStorage.getItem('fractionRaceLeaderboard');
+                if (saved) {
+                    return JSON.parse(saved);
+                }
+                // Tạo dữ liệu mẫu ban đầu
+                return [
+                    {name: "Minh Anh", score: 95, date: "2024-01-15"},
+                    {name: "Hoàng Nam", score: 90, date: "2024-01-14"},
+                    {name: "Thu Hà", score: 85, date: "2024-01-13"},
+                    {name: "Đức Thành", score: 80, date: "2024-01-12"},
+                    {name: "Lan Phương", score: 75, date: "2024-01-11"}
+                ];
+            }
+            
+            saveLeaderboard() {
+                localStorage.setItem('fractionRaceLeaderboard', JSON.stringify(this.leaderboard));
+            }
+            
+            savePlayerScore() {
+                const playerName = document.getElementById('playerName').value.trim();
+                if (!playerName) {
+                    alert('Vui lòng nhập tên của bạn!');
+                    return;
+                }
+                
+                const today = new Date().toISOString().split('T')[0];
+                const newEntry = {
+                    name: playerName,
+                    score: this.score,
+                    date: today
+                };
+                
+                this.leaderboard.push(newEntry);
+                this.leaderboard.sort((a, b) => b.score - a.score);
+                this.leaderboard = this.leaderboard.slice(0, 20); // Chỉ giữ top 20
+                
+                this.saveLeaderboard();
+                
+                // Ẩn form nhập tên
+                document.getElementById('nameInput').style.display = 'none';
+                
+                // Hiển thị thông báo
+                const message = document.createElement('div');
+                message.className = 'bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4';
+                message.innerHTML = `✅ Đã lưu điểm của <strong>${playerName}</strong> vào bảng xếp hạng!`;
+                document.getElementById('gameOverContent').insertBefore(message, document.getElementById('nameInput'));
+                
+                setTimeout(() => {
+                    message.remove();
+                }, 3000);
+            }
+            
+            showLeaderboard() {
+                document.getElementById('gameOverScreen').classList.add('hidden');
+                document.getElementById('leaderboardScreen').classList.remove('hidden');
+                this.renderLeaderboard();
+            }
+            
+            hideLeaderboard() {
+                document.getElementById('leaderboardScreen').classList.add('hidden');
+                // Kiểm tra xem có đang trong game hay ở menu chính
+                if (document.getElementById('gameOverScreen').classList.contains('hidden') && 
+                    document.getElementById('questionArea').classList.contains('hidden')) {
+                    // Đang ở menu chính
+                    document.getElementById('levelSelectionScreen').classList.remove('hidden');
+                } else {
+                    // Đang trong game
+                    document.getElementById('gameOverScreen').classList.remove('hidden');
+                }
+            }
+            
+            renderLeaderboard() {
+                const container = document.getElementById('leaderboardList');
+                
+                if (this.leaderboard.length === 0) {
+                    container.innerHTML = '<p class="text-gray-500 text-center py-8">Chưa có người chơi nào!</p>';
+                    return;
+                }
+                
+                let html = '<div class="space-y-2">';
+                
+                this.leaderboard.forEach((player, index) => {
+                    const rank = index + 1;
+                    let rankIcon = '';
+                    let rankClass = '';
+                    
+                    if (rank === 1) {
+                        rankIcon = '🥇';
+                        rankClass = 'bg-yellow-50 border-yellow-200';
+                    } else if (rank === 2) {
+                        rankIcon = '🥈';
+                        rankClass = 'bg-gray-50 border-gray-200';
+                    } else if (rank === 3) {
+                        rankIcon = '🥉';
+                        rankClass = 'bg-orange-50 border-orange-200';
+                    } else {
+                        rankIcon = `#${rank}`;
+                        rankClass = 'bg-white border-gray-200';
+                    }
+                    
+                    html += `
+                        <div class="flex items-center justify-between p-3 border rounded-lg ${rankClass}">
+                            <div class="flex items-center space-x-3">
+                                <div class="text-lg font-bold w-12 text-center">${rankIcon}</div>
+                                <div>
+                                    <div class="font-semibold text-gray-800">${player.name}</div>
+                                    <div class="text-sm text-gray-500">${player.date}</div>
+                                </div>
+                            </div>
+                            <div class="text-xl font-bold text-blue-600">${player.score}</div>
+                        </div>
+                    `;
+                });
+                
+                html += '</div>';
+                container.innerHTML = html;
+            }
+        }
+        
+        // Khởi tạo game khi trang web load
+        document.addEventListener('DOMContentLoaded', () => {
+            new FractionRaceGame();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'980414e6d113f309',t:'MTc1ODA2NDY5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
